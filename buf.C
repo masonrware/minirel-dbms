@@ -73,7 +73,10 @@ const Status BufMgr::allocBuf(int &frame) {
 
     while (true){ // some condition here
         clockHand = (clockHand + 1) % numBufs;
-        if (clockHand == 0) pinCount = 0;
+        if (clockHand == 0) {
+            printf("PINCOUNT RESET\n");
+            pinCount = 0;
+        }
 
         BufDesc* bd = &bufTable[clockHand];
 
@@ -171,7 +174,7 @@ const Status BufMgr::allocBuf(int &frame) {
 //     }
 
 //     return BUFFEREXCEEDED; // All buffer frames are pinned
-}
+// }
 
 /**
  * First check whether the page is already in the buffer pool by invoking the lookup() method on the hashtable to get a frame number.  
