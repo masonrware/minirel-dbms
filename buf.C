@@ -72,11 +72,13 @@ const Status BufMgr::allocBuf(int &frame) {
     int pinCount = 0;
 
     while (true){ // some condition here
-        clockHand = (clockHand + 1) % numBufs;
         if (clockHand == 0) {
             printf("PINCOUNT RESET\n");
             pinCount = 0;
         }
+        
+        clockHand = (clockHand + 1) % numBufs;
+        
 
         BufDesc* bd = &bufTable[clockHand];
 
