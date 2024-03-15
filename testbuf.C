@@ -121,9 +121,12 @@ int main()
 
     for (i = 0; i < num/3; i++) 
     {
+      printf("Iteration %d: 1", i);
       CALL(bufMgr->allocPage(file2, pageno2, page2));
+      printf("Iteration %d: 2", i);
       sprintf((char*)page2, "test.2 Page %d %7.1f", pageno2, (float)pageno2);
       CALL(bufMgr->allocPage(file3, pageno3, page3));
+      printf("Iteration %d: 3", i);
       sprintf((char*)page3, "test.3 Page %d %7.1f", pageno3, (float)pageno3);
       pageno = j[random() % num];
       CALL(bufMgr->readPage(file1, pageno, page));
