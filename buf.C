@@ -73,7 +73,7 @@ const Status BufMgr::allocBuf(int &frame) {
 
     while (true){ // some condition here
         if (clockHand == 0) {
-            printf("PINCOUNT RESET\n");
+            // printf("PINCOUNT RESET\n");
             pinCount = 0;
         }
 
@@ -81,6 +81,13 @@ const Status BufMgr::allocBuf(int &frame) {
         
 
         BufDesc* bd = &bufTable[clockHand];
+        printf("\nPIN COUNT: %d\n", pinCount);
+        printf("\nBD Frame Num: %d\n", bd->frameNo);
+        printf("BD Page Num: %d\n", bd->pageNo);
+        printf("BD PinCnt: %d\n", bd->pinCnt);
+        printf("BD Dirty: %d\n", (int)(bd->dirty));
+        printf("BD Valid: %d\n", (int)(bd->valid));
+        printf("BD RefBit: %d\n\n", (int)(bd->refbit));
 
         if (bd->valid){
             if (bd->refbit){
@@ -89,9 +96,9 @@ const Status BufMgr::allocBuf(int &frame) {
             }
             else{
                 if (bd->pinCnt > 0){
-                    printf("Pin Count: %d\n", pinCount);
-                    printf("Frame Number: %d\nBd PC: %d\n", bd->frameNo, bd->pinCnt);
-                    printf("NumBufs: %d\n", numBufs);
+                    // printf("Pin Count: %d\n", pinCount);
+                    // printf("Frame Number: %d\nBd PC: %d\n", bd->frameNo, bd->pinCnt);
+                    // printf("NumBufs: %d\n", numBufs);
                     pinCount++;
                     
                     if (pinCount >= numBufs) return BUFFEREXCEEDED;
