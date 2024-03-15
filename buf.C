@@ -89,9 +89,11 @@ const Status BufMgr::allocBuf(int &frame) {
             }
             else{
                 if (bd->pinCnt > 0){
-                    pinCount++;
                     printf("Pin Count: %d\n", pinCount);
                     printf("Frame Number: %d\nBd PC: %d\n", bd->frameNo, bd->pinCnt);
+                    printf("NumBufs: %d\n", numBufs);
+                    pinCount++;
+                    
                     if (pinCount >= numBufs) return BUFFEREXCEEDED;
                     continue;
                 }
@@ -110,10 +112,9 @@ const Status BufMgr::allocBuf(int &frame) {
 
             }
         }
-        // Set
-        // bd->Set(bd->file, bd->pageNo);
+        
         bd->Clear();
-        // Use Frame
+        
         frame = clockHand;
 
         return OK;
