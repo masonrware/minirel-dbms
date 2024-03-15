@@ -95,6 +95,7 @@ int main()
 
     cout << "Allocating pages in a file..." << endl;
     for (i = 0; i < num; i++) {
+      printf("%d", j[i]);
       CALL(bufMgr->allocPage(file1, j[i], page));
       printf("Page allocated, moving to print line...\n");
       sprintf((char*)page, "test.1 Page %d %7.1f", j[i], (float)j[i]);
