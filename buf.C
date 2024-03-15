@@ -62,22 +62,73 @@ BufMgr::~BufMgr() {
     delete [] bufPool;
 }
 
-
-const Status BufMgr::allocBuf(int & frame) 
-{
-
-/** Allocates a free frame using the clock algorithm; if necessary, writing a dirty page back to disk. 
- * Returns BUFFEREXCEEDED if all buffer frames are pinned, UNIXERR if the call to the I/O layer returned an error when a dirty page was being written to disk and OK otherwise. 
- * This private method will get called by the readPage() and allocPage() methods below.
- *
- * Make sure that if the buffer frame allocated has a valid page in it, that you remove the appropriate entry from the hash table.
-*/
+const Status BufMgr::allocBuf(int &frame) {
 
 }
 
-	
-const Status BufMgr::readPage(File* file, const int PageNo, Page*& page)
-{
+
+/** Allocates a free frame using the clock algorithm; if necessary, writing a dirty page back to disk. 
+ * Returns BUFFEREXCEEDED if all buffer frames are pinned, UNIXERR if the call to the I/O layer returned an error when a dirty page was being written to disk and OK otherwise.  
+ * This private method will get called by the readPage() and allocPage() methods described below.
+ * Make sure that if the buffer frame allocated has a valid page in it, that you remove the appropriate entry from the hash table. 
+*/
+const Status BufMgr::allocBuf(int &frame) {
+    int numAttempts = 0;
+
+    while (numAttempts < numBufs) {
+        // Step 1: Advance the clock hand pointer
+        clockHand = (clockHand + 1) % numBufs;
+        
+        BufDesc *bufDesc = &bufTable[clockHand];
+
+        // Step 2: Check if the valid bit is set
+        if (bufDesc->valid) {
+            // Step 3: Check if the refBit is set
+            if (bufDesc->refbit) {
+                // Step 4: Set reference bit to false
+                bufDesc->refbit = false;
+            } else {
+                // Step 5: Check if the page is pinned
+                if (bufDesc->pinCnt > 0) {
+                    // Restart from Step 1
+                    continue;
+                }
+                
+                // Step 6: Check if the dirty bit is set
+                if (bufDesc->dirty) {
+                    // Step 7: Flush page to disk
+                    Status status = bufDesc->file->writePage(bufDesc->pageNo, &(bufPool[clockHand]));
+                    if (status != OK) {
+                        return UNIXERR; // Error writing page to disk
+                    }
+                }
+
+                // Step 8: Remove entry from hash table if valid page exists
+                if (bufDesc->file != nullptr && bufDesc->pageNo != -1) {
+                    hashTable->remove(bufDesc->file, bufDesc->pageNo);
+                }
+                
+                // Step 9: Reset buffer descriptor
+                bufDesc->Clear();
+                
+                // Step 10: Set the frame and return
+                frame = clockHand;
+                return OK;
+            }
+        } else {
+            // Step 9: Reset buffer descriptor
+            bufDesc->Clear();
+            
+            // Step 10: Set the frame and return
+            frame = clockHand;
+            return OK;
+        }
+
+        numAttempts++;
+    }
+
+    return BUFFEREXCEEDED; // All buffer frames are pinned
+}
 
 /**
  * First check whether the page is already in the buffer pool by invoking the lookup() method on the hashtable to get a frame number.  
@@ -95,8 +146,55 @@ const Status BufMgr::readPage(File* file, const int PageNo, Page*& page)
  * 
  * Returns OK if no errors occurred, UNIXERR if a Unix error occurred, BUFFEREXCEEDED if all buffer frames are pinned, HASHTBLERROR if a hash table error occurred. 
 */
+const Status BufMgr::readPage(File* file, const int PageNo, Page*& page) {
+    int frameNo;
 
+    // Check if (file, PageNo) is currently in the buffer pool
+    Status lookupStatus = hashTable->lookup(file, PageNo, frameNo);
+
+    // Case 1: Page is not in the buffer pool
+    if (lookupStatus == HASHNOTFOUND) {
+        // Allocate a buffer frame
+        Status allocStatus = allocBuf(frameNo);
+        if (allocStatus != OK) {
+            return allocStatus; // BUFFEREXCEEDED or UNIXERR
+        }
+
+        // Read the page from disk into the buffer pool frame
+        Status readStatus = file->readPage(PageNo, &(bufPool[frameNo]));
+        if (readStatus != OK) {
+            return readStatus; // UNIXERR
+        }
+
+        // Insert the page into the hashtable
+        Status insertStatus = hashTable->insert(file, PageNo, frameNo);
+        if (insertStatus != OK) {
+            return insertStatus; // HASHTBLERROR
+        }
+
+        // Set up the frame properly
+        bufTable[frameNo].Set(file, PageNo);
+        // TODO: redundant?
+        bufTable[frameNo].pinCnt = 1;
+
+        // Return a pointer to the frame containing the page
+        page = &(bufPool[frameNo]);
+
+        return OK;
+    }
+
+    // Case 2: Page is in the buffer pool
+    // Set the appropriate refbit
+    bufTable[frameNo].refbit = true;
+    // Increment the pinCnt for the page
+    bufTable[frameNo].pinCnt++;
+
+    // Return a pointer to the frame containing the page
+    page = &(bufPool[frameNo]);
+
+    return OK;
 }
+
 
 
 const Status BufMgr::unPinPage(File* file, const int PageNo, 
