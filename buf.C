@@ -88,7 +88,7 @@ const Status BufMgr::allocBuf(int &frame) {
             else{
                 if (bd->pinCnt > 0){
                     pinCount++;
-                    if (pinCount > numBufs) return BUFFEREXCEEDED;
+                    if (pinCount >= numBufs) return BUFFEREXCEEDED;
                     continue;
                 }
 
