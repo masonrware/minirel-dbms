@@ -73,7 +73,7 @@ const Status BufMgr::allocBuf(int &frame) {
 
     while (true){ // some condition here
         clockHand = (clockHand + 1) % numBufs;
-        if (clockHand == (numBufs - 1)) {
+        if (clockHand == 0) {
             printf("PINCOUNT RESET\n");
             pinCount = 0;
         }
@@ -221,7 +221,7 @@ const Status BufMgr::readPage(File* file, const int PageNo, Page*& page) {
         // Set up the frame properly
         bufTable[frameNo].Set(file, PageNo);
         // TODO: redundant?
-        bufTable[frameNo].pinCnt = 1;
+        // bufTable[frameNo].pinCnt = 1;
 
         // Return a pointer to the frame containing the page
         page = &(bufPool[frameNo]);
