@@ -76,7 +76,7 @@ const Status BufMgr::allocBuf(int &frame) {
             printf("PINCOUNT RESET\n");
             pinCount = 0;
         }
-        
+
         clockHand = (clockHand + 1) % numBufs;
         
 
@@ -109,8 +109,8 @@ const Status BufMgr::allocBuf(int &frame) {
             }
         }
         // Set
-        bd->Set(bd->file, bd->pageNo);
-
+        // bd->Set(bd->file, bd->pageNo);
+        bd->Clear();
         // Use Frame
         frame = clockHand;
 
