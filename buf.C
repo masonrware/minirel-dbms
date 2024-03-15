@@ -174,7 +174,8 @@ const Status BufMgr::readPage(File* file, const int PageNo, Page*& page) {
         bufTable[frameNo].pinCnt = 1;
 
         // Return a pointer to the frame containing the page
-        page = &(bufPool[frameNo]);
+        // page = &(bufPool[frameNo]);
+        page = (Page *)(&bufTable[frameNo]);
 
         return OK;
     }
@@ -186,7 +187,8 @@ const Status BufMgr::readPage(File* file, const int PageNo, Page*& page) {
     bufTable[frameNo].pinCnt++;
 
     // Return a pointer to the frame containing the page
-    page = &(bufPool[frameNo]);
+    // page = &(bufPool[frameNo]);
+    page = (Page *)(&bufTable[frameNo]);
 
     return OK;
 }
