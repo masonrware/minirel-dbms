@@ -109,7 +109,8 @@ const Status BufMgr::allocBuf(int &frame) {
             }
         }
         // Set
-        bd->Set(bd->file, bd->pageNo);
+        // bd->Set(bd->file, bd->pageNo);
+        bd->Clear();
 
         // Use Frame
         frame = clockHand;
@@ -222,11 +223,6 @@ const Status BufMgr::readPage(File* file, const int PageNo, Page*& page) {
 
         // Set up the frame properly
         bufTable[frameNo].Set(file, PageNo);
-<<<<<<< HEAD
-        // TODO: redundant?
-        bufTable[frameNo].pinCnt = 1;
-=======
->>>>>>> ben
 
         // Return a pointer to the frame containing the page
         page = &(bufPool[frameNo]);
@@ -247,14 +243,6 @@ const Status BufMgr::readPage(File* file, const int PageNo, Page*& page) {
 }
 
 
-<<<<<<< HEAD
-
-const Status BufMgr::unPinPage(File* file, const int PageNo, 
-			       const bool dirty) 
-{
-
-=======
->>>>>>> ben
 /**
  * Decrements the pinCnt of the frame containing (file, PageNo) and, if dirty == true, sets the dirty bit.  
  * Returns OK if no errors occurred, HASHNOTFOUND if the page is not in the buffer pool hash table, PAGENOTPINNED if the pin count is already 0. 
