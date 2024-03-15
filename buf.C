@@ -62,10 +62,6 @@ BufMgr::~BufMgr() {
     delete [] bufPool;
 }
 
-const Status BufMgr::allocBuf(int &frame) {
-
-}
-
 
 /** Allocates a free frame using the clock algorithm; if necessary, writing a dirty page back to disk. 
  * Returns BUFFEREXCEEDED if all buffer frames are pinned, UNIXERR if the call to the I/O layer returned an error when a dirty page was being written to disk and OK otherwise.  
@@ -213,11 +209,7 @@ const Status BufMgr::unPinPage(File* file, const int PageNo, const bool dirty)
         if (dirty) frame.dirty = 1;
         return OK;
     }
-
 }
-
-const Status BufMgr::allocPage(File* file, int& pageNo, Page*& page) 
-{
 
 /**
  * This call is kind of weird. 
@@ -228,7 +220,22 @@ const Status BufMgr::allocPage(File* file, int& pageNo, Page*& page)
  * The method returns both the page number of the newly allocated page to the caller via the pageNo parameter and a pointer to the buffer frame allocated for the page via the page parameter. 
  * Returns OK if no errors occurred, UNIXERR if a Unix error occurred, BUFFEREXCEEDED if all buffer frames are pinned and HASHTBLERROR if a hash table error occurred.  
 */
+const Status BufMgr::allocPage(File* file, int& pageNo, Page*& page) 
+{
+    Status allocPageStat = file->allocatePage(pageNo);
+    if (allocPageStat != OK) return allocPageStat;
 
+    int frameNo;
+
+    Status allocFrame = allocBuf(frameNo);
+    if (allocFrame != OK) return allocFrame;
+
+    Status htInsert = hashTable->insert(file, pageNo, frameNo);
+    if (htInsert == HASHTBLERROR) return HASHTBLERROR;
+
+    bufTable[frameNo].Set(file, pageNo);
+
+    return OK;
 }
 
 const Status BufMgr::disposePage(File* file, const int pageNo) 
