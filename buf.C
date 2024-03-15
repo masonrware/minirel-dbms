@@ -69,61 +69,108 @@ BufMgr::~BufMgr() {
  * Make sure that if the buffer frame allocated has a valid page in it, that you remove the appropriate entry from the hash table. 
 */
 const Status BufMgr::allocBuf(int &frame) {
-    int numAttempts = 0;
+    int pinCount = 0;
 
-    while (numAttempts < numBufs) {
-        // Step 1: Advance the clock hand pointer
+    while (true){ // some condition here
         clockHand = (clockHand + 1) % numBufs;
-        
-        BufDesc *bufDesc = &bufTable[clockHand];
+        if (clockHand == 0) pinCount = 0;
 
-        // Step 2: Check if the valid bit is set
-        if (bufDesc->valid) {
-            // Step 3: Check if the refBit is set
-            if (bufDesc->refbit) {
-                // Step 4: Set reference bit to false
-                bufDesc->refbit = false;
-            } else {
-                // Step 5: Check if the page is pinned
-                if (bufDesc->pinCnt > 0) {
-                    // Restart from Step 1
+        BufDesc* bd = &bufTable[clockHand];
+
+        if (bd->valid){
+            if (bd->refbit){
+                bd->refbit = 0;
+                continue;
+            }
+            else{
+                if (bd->pinCnt > 0){
+                    pinCount++;
+                    if (pinCount >= numBufs) return BUFFEREXCEEDED;
                     continue;
                 }
-                
-                // Step 6: Check if the dirty bit is set
-                if (bufDesc->dirty) {
-                    // Step 7: Flush page to disk
-                    Status status = bufDesc->file->writePage(bufDesc->pageNo, &(bufPool[clockHand]));
+
+                if (bd->dirty){
+                    // flush to disk
+                    Status status = bd->file->writePage(bd->pageNo, &(bufPool[clockHand]));
                     if (status != OK) {
                         return UNIXERR; // Error writing page to disk
                     }
                 }
 
-                // Step 8: Remove entry from hash table if valid page exists
-                if (bufDesc->file != nullptr && bufDesc->pageNo != -1) {
-                    hashTable->remove(bufDesc->file, bufDesc->pageNo);
+                if (bd->file != nullptr && bd->pageNo != -1) {
+                    hashTable->remove(bd->file, bd->pageNo);
                 }
-                
-                // Step 9: Reset buffer descriptor
-                bufDesc->Clear();
-                
-                // Step 10: Set the frame and return
-                frame = clockHand;
-                return OK;
+
             }
-        } else {
-            // Step 9: Reset buffer descriptor
-            bufDesc->Clear();
-            
-            // Step 10: Set the frame and return
-            frame = clockHand;
-            return OK;
         }
+        // Set
+        bd->Set(bd->file, bd->pageNo);
 
-        numAttempts++;
+        // Use Frame
+        frame = clockHand;
+
+        return OK;
+
     }
+}
 
-    return BUFFEREXCEEDED; // All buffer frames are pinned
+
+// const Status BufMgr::allocBuf(int &frame) {
+//     int numAttempts = 0;
+
+//     while (numAttempts < numBufs) {
+//         // Step 1: Advance the clock hand pointer
+//         clockHand = (clockHand + 1) % numBufs;
+        
+//         BufDesc *bufDesc = &bufTable[clockHand];
+
+//         // Step 2: Check if the valid bit is set
+//         if (bufDesc->valid) {
+//             // Step 3: Check if the refBit is set
+//             if (bufDesc->refbit) {
+//                 // Step 4: Set reference bit to false
+//                 bufDesc->refbit = false;
+//             } else {
+//                 // Step 5: Check if the page is pinned
+//                 if (bufDesc->pinCnt > 0) {
+//                     // Restart from Step 1
+//                     continue;
+//                 }
+                
+//                 // Step 6: Check if the dirty bit is set
+//                 if (bufDesc->dirty) {
+//                     // Step 7: Flush page to disk
+//                     Status status = bufDesc->file->writePage(bufDesc->pageNo, &(bufPool[clockHand]));
+//                     if (status != OK) {
+//                         return UNIXERR; // Error writing page to disk
+//                     }
+//                 }
+
+//                 // Step 8: Remove entry from hash table if valid page exists
+//                 if (bufDesc->file != nullptr && bufDesc->pageNo != -1) {
+//                     hashTable->remove(bufDesc->file, bufDesc->pageNo);
+//                 }
+                
+//                 // Step 9: Reset buffer descriptor
+//                 bufDesc->Clear();
+                
+//                 // Step 10: Set the frame and return
+//                 frame = clockHand;
+//                 return OK;
+//             }
+//         } else {
+//             // Step 9: Reset buffer descriptor
+//             bufDesc->Clear();
+            
+//             // Step 10: Set the frame and return
+//             frame = clockHand;
+//             return OK;
+//         }
+
+//         numAttempts++;
+//     }
+
+//     return BUFFEREXCEEDED; // All buffer frames are pinned
 }
 
 /**
@@ -175,7 +222,6 @@ const Status BufMgr::readPage(File* file, const int PageNo, Page*& page) {
 
         // Return a pointer to the frame containing the page
         page = &(bufPool[frameNo]);
-        // page = (Page *)(&bufTable[frameNo]);
 
         return OK;
     }
@@ -188,7 +234,6 @@ const Status BufMgr::readPage(File* file, const int PageNo, Page*& page) {
 
     // Return a pointer to the frame containing the page
     page = &(bufPool[frameNo]);
-    // page = (Page *)(&bufTable[frameNo]);
 
     return OK;
 }
@@ -237,7 +282,6 @@ const Status BufMgr::allocPage(File* file, int& pageNo, Page*& page)
 
     bufTable[frameNo].Set(file, pageNo);
 
-    // page = (Page *)(&bufTable[frameNo]);
     page = &bufPool[frameNo];
 
     return OK;
