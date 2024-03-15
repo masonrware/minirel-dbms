@@ -90,6 +90,7 @@ const Status BufMgr::allocBuf(int &frame) {
             else{
                 if (bd->pinCnt > 0){
                     pinCount++;
+                    printf("%d\n", pinCount);
                     if (pinCount >= numBufs) return BUFFEREXCEEDED;
                     continue;
                 }
