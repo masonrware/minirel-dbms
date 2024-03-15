@@ -73,7 +73,7 @@ const Status BufMgr::allocBuf(int &frame) {
 
     while (true){ // some condition here
         clockHand = (clockHand + 1) % numBufs;
-        if (clockHand == 0) {
+        if (clockHand == (numBufs - 1)) {
             printf("PINCOUNT RESET\n");
             pinCount = 0;
         }
