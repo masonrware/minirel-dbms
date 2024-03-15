@@ -220,8 +220,6 @@ const Status BufMgr::readPage(File* file, const int PageNo, Page*& page) {
 
         // Set up the frame properly
         bufTable[frameNo].Set(file, PageNo);
-        // TODO: redundant?
-        // bufTable[frameNo].pinCnt = 1;
 
         // Return a pointer to the frame containing the page
         page = &(bufPool[frameNo]);
