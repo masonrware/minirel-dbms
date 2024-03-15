@@ -95,7 +95,6 @@ int main()
 
     cout << "Allocating pages in a file..." << endl;
     for (i = 0; i < num; i++) {
-      // printf("%d\n", j[i]);
       CALL(bufMgr->allocPage(file1, j[i], page));
       printf("%d\n", j[i]);
       printf("Page allocated, moving to print line...\n");
@@ -112,8 +111,8 @@ int main()
       CALL(bufMgr->unPinPage(file1, j[i], false));
     }
     cout<< "Test passed"<<endl<<endl;
+    
 
-   
     cout << "Writing and reading back multiple files..." << endl;
     cout << "Expected Result: ";
     cout << "The output will consist of the file name, page number, and a value."<<endl;
