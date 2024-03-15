@@ -222,19 +222,24 @@ const Status BufMgr::unPinPage(File* file, const int PageNo, const bool dirty)
 */
 const Status BufMgr::allocPage(File* file, int& pageNo, Page*& page) 
 {
+    printf("1\n");
     Status allocPageStat = file->allocatePage(pageNo);
     if (allocPageStat != OK) return allocPageStat;
 
     int frameNo;
 
+    printf("2\n");
     Status allocFrame = allocBuf(frameNo);
     if (allocFrame != OK) return allocFrame;
 
+    printf("3\n");
     Status htInsert = hashTable->insert(file, pageNo, frameNo);
     if (htInsert == HASHTBLERROR) return HASHTBLERROR;
 
+    printf("4\n");
     bufTable[frameNo].Set(file, pageNo);
 
+    printf("5\n");
     return OK;
 }
 
