@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "*.ejs": "html",
+        "buf.C": "cpp",
+        "db.C": "cpp",
+        "testbuf.C": "cpp",
+        "error.C": "cpp",
+        "bufHash.C": "cpp",
+        "iostream": "cpp"
+    }
+}
