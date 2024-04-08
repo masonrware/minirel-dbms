@@ -21,7 +21,6 @@ class File {
   friend class OpenFileHashTbl;
 
  public:
- string fileName;                    // The name of the file
 
   Status allocatePage(int& pageNo);     // allocate a new page
   const Status disposePage(const int pageNo);       // release space for a page
@@ -56,7 +55,7 @@ class File {
   void listFree();                      // list free pages
 #endif
 
-  // string fileName;                    // The name of the file
+  string fileName;                    // The name of the file
   int openCnt;                        // # times file has been opened
   int unixFile;                       // unix file stream for file
 };
