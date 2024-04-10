@@ -6,6 +6,9 @@
         "testbuf.C": "cpp",
         "error.C": "cpp",
         "bufHash.C": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "heapfile.C": "cpp",
+        "page.C": "cpp",
+        "testfile.C": "cpp"
     }
 }
