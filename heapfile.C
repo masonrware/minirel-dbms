@@ -1,5 +1,8 @@
 #include "heapfile.h"
 #include "error.h"
+// is this allowed??
+#include <string.h>
+#include <Kernel/string.h>
 
 // routine to create a heapfile
 const Status createHeapFile(const string fileName)
@@ -15,20 +18,32 @@ const Status createHeapFile(const string fileName)
     status = db.openFile(fileName, file);
     if (status != OK)
     {
-		// file doesn't exist. First create it and allocate
-		// an empty header page and data page.
+		// Create db level file
+		status = db.createFile(fileName);
+		status = db.openFile(fileName, file);
+
+        // Alloc page in file for file header
+		status = bufMgr->allocPage(file, hdrPageNo, newPage);
 		
+		FileHdrPage* pagePtr = (FileHdrPage*) newPage;
+
+        // Initialize values of header page
+        hdrPage = new FileHdrPage();
+		strcpy(hdrPage->fileName, pagePtr->fileName, MAXNAMESIZE);
+		hdrPage->firstPage = pagePtr->firstPage;
+        hdrPage->lastPage = pagePtr->lastPage;
+		hdrPage->pageCnt = pagePtr->pageCnt;
+		hdrPage->recCnt = pagePtr->recCnt;
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+        // Allocate first data page
+		status = bufMgr->allocPage(file, newPageNo, newPage);
+        newPage->init(newPageNo);
+
+        // Set header first/last pages to number of new page
+        hdrPage->firstPage = newPageNo;
+		hdrPage->lastPage = newPageNo;
+
+        
 		
     }
     return (FILEEXISTS);
