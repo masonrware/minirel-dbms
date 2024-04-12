@@ -43,7 +43,13 @@ const Status createHeapFile(const string fileName)
         hdrPage->firstPage = newPageNo;
 		hdrPage->lastPage = newPageNo;
 
-        
+        // Unpin pages (?)
+        bufMgr->unPinPage(file, hdrPageNo, true);
+        bufMgr->unPinPage(file, newPageNo, true);
+
+        // Flush and close file
+        bufMgr->flushFile(file);
+        db.closeFile(file);
 		
     }
     return (FILEEXISTS);
