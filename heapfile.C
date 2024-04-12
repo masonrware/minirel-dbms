@@ -1,8 +1,9 @@
 #include "heapfile.h"
 #include "error.h"
 // is this allowed??
-#include <string.h>
-#include <Kernel/string.h>
+// #include <string.h>
+// #include <Kernel/string.h>
+// #include <cstring>
 
 // routine to create a heapfile
 const Status createHeapFile(const string fileName)
@@ -29,7 +30,13 @@ const Status createHeapFile(const string fileName)
 
         // Initialize values of header page
         hdrPage = new FileHdrPage();
-		strcpy(hdrPage->fileName, pagePtr->fileName, MAXNAMESIZE);
+		// strcpy(hdrPage->fileName, pagePtr->fileName, MAXNAMESIZE);
+
+        // strcpy being weird, copying by character
+        for (int i = 0; i < MAXNAMESIZE; i++){
+            hdrPage->fileName[i] = pagePtr->fileName[i];
+        }
+
 		hdrPage->firstPage = pagePtr->firstPage;
         hdrPage->lastPage = pagePtr->lastPage;
 		hdrPage->pageCnt = pagePtr->pageCnt;
