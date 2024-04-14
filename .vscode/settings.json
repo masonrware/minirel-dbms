@@ -1,11 +1,13 @@
 {
     "files.associations": {
+        "*.c": "c",
         "*.ejs": "html",
         "buf.C": "cpp",
         "db.C": "cpp",
         "testbuf.C": "cpp",
         "error.C": "cpp",
         "bufHash.C": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "heapfile.C": "cpp"
     }
 }
