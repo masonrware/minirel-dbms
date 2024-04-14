@@ -278,35 +278,59 @@ const Status HeapFileScan::resetScan()
 }
 
 
-const Status HeapFileScan::scanNext(RID& outRid)
-{
-    Status 	status = OK;
-    RID		nextRid;
-    RID		tmpRid;
-    int 	nextPageNo;
-    Record      rec;
+// Lee: Function to load the first page of a heap file and handle initialization and errors
+Status loadFirstPage() {
+    currPageNo = headerPage->firstPage;
+    if (curPageNo == -1) {
+        return FILEEOF;  // No more records in the file, stop iterating
+    }
 
-    // Do we start on first page of file?
-        // check if curPage is null? or curRec?
-            // if curPage is null do we set to first page?
-            // or is it null when we reach the end of the file
-
-    // curRec
-	// matchRec - see if record matches scan filter (true / false)
-        // convert RID to pointer to rec data first
-
-	// Page->getNextPage - return pageNum of next page
-        // then use bufMgr->readPage to read next page into curPage
-        // read page sets pin count to 1 (?)
-	
-	// set outRid to curRec if it matches search
-    // return OK if no errors, otherwise first error that occurs
-	
-	
-	
-	
-	
+    Status status = bufMgr->readPage(filePtr, curPageNo, curPage);
+    if (status != OK) {
+        return status;  // Return read page error
+    }
+    return OK;
 }
+
+// Lee: Function to advance to the next record within the current page or load a new page if necessary
+Status advanceToNextRecord() {
+    Status status = curPage->getNextRecord(curRec);
+    if (status == ENDOFPAGE) {
+        int nextPageNo = curPage->getNextPage();
+        if (nextPageNo == -1) {
+            return FILEEOF;  // No more pages in the file
+        }
+        status = bufMgr->unpinPage(curPageNo);
+        if (status != OK) return status;
+        
+        curPageNo = nextPageNo;
+        status = bufMgr->readPage(filePtr, curPageNo, curPage);
+        if (status != OK) return status;
+
+        return curPage->getFirstRecord(curRec);
+    }
+    return status;
+}
+
+// Lee: Main function to fetch the next record from the heap file
+const Status HeapFileScan::scanNext(RID& outRid) {
+    if (curPageNo < 0) {
+        return FILEEOF;  // No more records in the file
+    }
+
+    if (curPage == NULL) {
+        Status status = loadFirstPage();
+        if (status != OK) return status;  // Handle page load error
+    }
+
+    Status status = advanceToNextRecord();
+    if (status == OK) {
+        outRid = curRec;
+    }
+    return status;
+}
+	
+
 
 
 // returns pointer to the current record.  page is left pinned
