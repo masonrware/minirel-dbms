@@ -83,8 +83,10 @@ HeapFile::HeapFile(const string & fileName, Status& returnStatus)
         // Get the header page
         Page* headerPage;
         int headerPageNo;
+        status = filePtr->getFirstPage(headerPageNo);
+        if (status!=OK) {return;}
         // Read and pin the header page
-        if ((status = bufMgr->readPage(filePtr, filePtr->getFirstPage(headerPageNo), headerPage)) != OK) {
+        if ((status = bufMgr->readPage(filePtr, headerPageNo, headerPage)) != OK) {
             cerr << "Error: Failed to read and pin the header page of file " << fileName << endl;
             returnStatus = status;
             return;
