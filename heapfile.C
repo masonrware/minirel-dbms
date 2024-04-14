@@ -1,9 +1,5 @@
 #include "heapfile.h"
 #include "error.h"
-// is this allowed??
-// #include <string.h>
-// #include <Kernel/string.h>
-// #include <cstring>
 
 // routine to create a heapfile
 const Status createHeapFile(const string fileName)
@@ -32,7 +28,7 @@ const Status createHeapFile(const string fileName)
         hdrPage = new FileHdrPage();
 		// strcpy(hdrPage->fileName, pagePtr->fileName, MAXNAMESIZE);
 
-        // strcpy being weird, copying by character
+        // strcpy being weird, copying by character, null terminator?
         for (int i = 0; i < MAXNAMESIZE; i++){
             hdrPage->fileName[i] = pagePtr->fileName[i];
         }
@@ -423,17 +419,45 @@ const Status InsertFileScan::insertRecord(const Record & rec, RID& outRid)
         return INVALIDRECLEN;
     }
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+    if (curPage == NULL){
+        status = bufMgr->readPage(filePtr, headerPage->lastPage, curPage);
+        status = curPage->insertRecord(rec, outRid);
+
+        if (status == OK){          // Bookkeeping 
+            headerPage->recCnt++;
+            hdrDirtyFlag = true;
+            curDirtyFlag = true;
+            curRec = outRid;
+
+            return status;
+        }
+        
+    }
+
+    // Can't insert into current page, create a new one
+    newPage = new Page();
+    newPage->init(newPageNo);
+
+    status = bufMgr->readPage(filePtr, headerPage->lastPage, curPage);
+    curPage->setNextPage(newPageNo);
+    headerPage->lastPage = newPageNo;
+    headerPage->pageCnt++;
+
+    // Last page should now be newly alloc'd page
+    status = bufMgr->readPage(filePtr, headerPage->lastPage, curPage);
+    status = curPage->insertRecord(rec, outRid);
+
+    if (status == OK){          // Bookkeeping 
+        headerPage->recCnt++;
+        hdrDirtyFlag = true;
+        curDirtyFlag = true;
+        curRec = outRid;
+
+        return status;
+    }
+
+    // Which error to return?
+    return RECNOTFOUND; 
   
 }
 
