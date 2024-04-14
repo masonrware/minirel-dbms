@@ -286,11 +286,21 @@ const Status HeapFileScan::scanNext(RID& outRid)
     int 	nextPageNo;
     Record      rec;
 
-    
+    // Do we start on first page of file?
+        // check if curPage is null? or curRec?
+            // if curPage is null do we set to first page?
+            // or is it null when we reach the end of the file
+
+    // curRec
+	// matchRec - see if record matches scan filter (true / false)
+        // convert RID to pointer to rec data first
+
+	// Page->getNextPage - return pageNum of next page
+        // then use bufMgr->readPage to read next page into curPage
+        // read page sets pin count to 1 (?)
 	
-	
-	
-	
+	// set outRid to curRec if it matches search
+    // return OK if no errors, otherwise first error that occurs
 	
 	
 	
