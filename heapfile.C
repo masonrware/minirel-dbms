@@ -593,15 +593,15 @@ InsertFileScan::~InsertFileScan()
 }
 
 // Insert a record into the file
-const Status InsertFileScan::insertRecord(const Record & rec, RID& outRid)
+const Status InsertFileScan::insertRecord(const Record &rec, RID &outRid)
 {
-    Page*   newPage;
-    int     newPageNo;
-    Status  status, unpinstatus;
-    RID     rid;
+    Page *newPage;
+    int newPageNo;
+    Status status, unpinstatus;
+    RID rid;
 
     // Check for very large records
-    if ((unsigned int) rec.length > PAGESIZE-DPFIXED)
+    if ((unsigned int)rec.length > PAGESIZE - DPFIXED)
     {
         // Will never fit on a page, so don't even bother looking
         return INVALIDRECLEN;
@@ -619,7 +619,8 @@ const Status InsertFileScan::insertRecord(const Record & rec, RID& outRid)
     }
 
     // if the current page is not the lastPage
-    if(curPageNo != headerPage->lastPage) {
+    if (curPageNo != headerPage->lastPage)
+    {
         // unpin curpage
         status = bufMgr->unPinPage(filePtr, curPageNo, true);
 
@@ -631,7 +632,6 @@ const Status InsertFileScan::insertRecord(const Record & rec, RID& outRid)
         }
     }
 
-    
     // Try to insert the record into the current page
     status = curPage->insertRecord(rec, rid);
     if (status == OK)
@@ -641,6 +641,7 @@ const Status InsertFileScan::insertRecord(const Record & rec, RID& outRid)
         hdrDirtyFlag = true;
         curDirtyFlag = true;
         outRid = rid;
+        cout << 500 << " " << rid.slotNo << endl;
 
         return OK;
     }
@@ -665,7 +666,6 @@ const Status InsertFileScan::insertRecord(const Record & rec, RID& outRid)
         // Link up the new page appropriately
         curPage->setNextPage(newPageNo);
         curDirtyFlag = true;
-
         status = bufMgr->unPinPage(filePtr, curPageNo, true);
         // TODO check status
 
@@ -689,6 +689,8 @@ const Status InsertFileScan::insertRecord(const Record & rec, RID& outRid)
         curDirtyFlag = true;
         outRid = rid;
 
+        cout << 549 << " " << outRid.slotNo << endl;
+
         return OK;
     }
     else
@@ -698,6 +700,3 @@ const Status InsertFileScan::insertRecord(const Record & rec, RID& outRid)
         return status;
     }
 }
-
-
-
