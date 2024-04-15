@@ -51,7 +51,6 @@ const Status createHeapFile(const string fileName)
 
 
         cout << "53 -- header info" << endl;
-        cout << file << endl;
         cout << "fileName: " << hdrPage->fileName << endl;
         cout << "firstPage: " << hdrPage->firstPage << endl;
         cout << "lastPage: " << hdrPage->lastPage << endl;
@@ -75,6 +74,8 @@ const Status createHeapFile(const string fileName)
             return status;
         }
 
+        cout << 77 << newPageNo << endl;
+        
         // Initialize the first data page.
         newPage->init(newPageNo);
 
@@ -135,7 +136,6 @@ HeapFile::HeapFile(const string & fileName, Status& returnStatus)
         headerPage = reinterpret_cast<FileHdrPage*>(hdrPage);
 
         cout << "137 -- header info" << endl;
-        cout << filePtr << endl;
         cout << "fileName: " << headerPage->fileName << endl;
         cout << "firstPage: " << headerPage->firstPage << endl;
         cout << "lastPage: " << headerPage->lastPage << endl;
