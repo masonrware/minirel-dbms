@@ -267,9 +267,7 @@ Status File::allocatePage(int& pageNo)
     Page newPage;
     memset(&newPage, 0, sizeof newPage);
     if ((status = intwrite(pageNo, &newPage)) != OK)
-    cout << 274 << endl;
       return status;
-      cout << 276 << endl;
 
     DBP(header).numPages++;
 
@@ -278,9 +276,7 @@ Status File::allocatePage(int& pageNo)
   }
 
   if ((status = intwrite(0, &header)) != OK)
-  cout << 285 << endl;
     return status;
-    cout << 287 << endl;
   
 #ifdef DEBUGFREE
   listFree();

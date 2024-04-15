@@ -73,8 +73,6 @@ const Status createHeapFile(const string fileName)
             cerr << "Error: Failed to allocate first data page for file " << fileName << endl;
             return status;
         }
-
-        cout << 77 << newPageNo << endl;
         
         // Initialize the first data page.
         newPage->init(newPageNo);
