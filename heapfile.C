@@ -232,7 +232,7 @@ const Status HeapFile::getRecord(const RID & rid, Record & rec)
         curDirtyFlag = false; // Current page initially not dirty
     }
 
-    cout << 235 << endl;
+    cout << "inserted record onto pageNo " << rid.pageNo << ", currently on " << curPageNo << endl;
     // Fetch the record from the current page
     status = curPage->getRecord(rid, rec);
 
