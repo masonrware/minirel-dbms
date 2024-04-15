@@ -79,7 +79,7 @@ HeapFile::HeapFile(const string & fileName, Status& returnStatus)
     // open the file and read in the header page and the first data page
     if ((status = db.openFile(fileName, filePtr)) == OK)
     {
-        createHeapFile(fileName);
+        // createHeapFile(fileName);
 
         Page * hdrPage;
         // Get the header page
