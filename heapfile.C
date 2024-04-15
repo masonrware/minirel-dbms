@@ -466,7 +466,7 @@ const Status InsertFileScan::insertRecord(const Record & rec, RID& outRid)
     newPage->init(headerPage->lastPage+1);
 
     // read the current lastPage into curPage
-    cout << headerPage->lastPage << endl;
+    cout << "lastPageNo:" << headerPage->lastPage << endl;
     if((status = bufMgr->readPage(filePtr, headerPage->lastPage, curPage)) != OK) {
         cerr << "Error: Failed to read headerPage->lastPage into curPage" << endl;
         return status;
