@@ -98,11 +98,11 @@ HeapFile::HeapFile(const string & fileName, Status& returnStatus)
         headerPage = (FileHdrPage*) hdrPage;
 
         cout << "header info" << endl;
-        cout << "fileName: " << headerPage->fileName;
-        cout << "firstPage: " << headerPage->firstPage;
-        cout << "lastPage: " << headerPage->lastPage;
-        cout << "pageCnt: " << headerPage->pageCnt;
-        cout << "recCnt: " << headerPage->recCnt;
+        cout << "fileName: " << headerPage->fileName << endl;
+        cout << "firstPage: " << headerPage->firstPage << endl;
+        cout << "lastPage: " << headerPage->lastPage << endl;
+        cout << "pageCnt: " << headerPage->pageCnt << endl;
+        cout << "recCnt: " << headerPage->recCnt << endl;
 
         // Get page number of first data page
         if((status = hdrPage->getNextPage(curPageNo)) !=OK ){
