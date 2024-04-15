@@ -48,7 +48,7 @@ int main(int argc, char **argv)
 
     // ================
 
-    cout << "TEST 1" << endl;
+    cout << "\n<><><><><><>\n" << "TEST  1" << endl;
 
     // destroy any old copies of "dummy.02"
     status = destroyHeapFile("dummy.02");
@@ -63,7 +63,7 @@ int main(int argc, char **argv)
 
     // ================
 
-    cout << "TEST 2" << endl;
+    cout << "\n<><><><><><>\n" << "TEST  2" << endl;
 
 
     // initialize all of rec1.s to keep purify happy
@@ -106,7 +106,7 @@ int main(int argc, char **argv)
 
     // ================
 
-    cout << "TEST 3" << endl;
+    cout << "\n<><><><><><>\n" << "TEST  3" << endl;
     
     cout << endl;
     cout << "pull 11th record from file dummy.02 using file->getRecord() " << endl;
@@ -138,7 +138,7 @@ int main(int argc, char **argv)
 
     // ================
 
-    cout << "TEST 4" << endl;
+    cout << "\n<><><><><><>\n" << "TEST  4" << endl;
     
     // scan the file sequentially checking that each record was stored properly
     cout << "scan file dummy.02 " << endl;
@@ -175,7 +175,7 @@ int main(int argc, char **argv)
 
     // ================
 
-    cout << "TEST 4" << endl;
+    cout << "\n<><><><><><>\n" << "TEST  5" << endl;
 
 	// scan the file sequentially checking that each record was stored properly
     cout << endl << "scan file dummy.02 " << endl;
@@ -212,7 +212,7 @@ int main(int argc, char **argv)
 
     // ================
 
-    cout << "TEST 5" << endl;
+    cout << "\n<><><><><><>\n" << "TEST  6" << endl;
 	    
     // pull every 7th record from the file directly w/o opening a scan
     // by using the file->getRecord() method
@@ -246,7 +246,7 @@ int main(int argc, char **argv)
 
     // ================
 
-    cout << "TEST 6" << endl;
+    cout << "\n<><><><><><>\n" << "TEST  7" << endl;
 
 	// next scan the file deleting all the odd records
     cout << endl;
@@ -287,7 +287,7 @@ int main(int argc, char **argv)
 
     // ================
 
-    cout << "TEST 7" << endl;
+    cout << "\n<><><><><><>\n" << "TEST  8" << endl;
 
     cout << endl;
     deleted = 0;
@@ -356,7 +356,7 @@ int main(int argc, char **argv)
 
     // ================
 
-    cout << "TEST 8" << endl;
+    cout << "\n<><><><><><>\n" << "TEST  9" << endl;
 
     status = createHeapFile("dummy.03");
     if (status != OK) 
@@ -373,7 +373,7 @@ int main(int argc, char **argv)
 
     // ================
 
-    cout << "TEST 9" << endl;
+    cout << "\n<><><><><><>\n" << "TEST  10" << endl;
 
     cout << endl;
     cout << "insert " << num << " variable-size records into dummy.03" << endl;
@@ -407,7 +407,7 @@ int main(int argc, char **argv)
 
     // ================
 
-    cout << "TEST 10" << endl;
+    cout << "\n<><><><><><>\n" << "TEST  11" << endl;
 
     cout << endl << "scan dummy.03 using the predicate < num/2 " << endl;
     j = num/2;
@@ -441,7 +441,7 @@ int main(int argc, char **argv)
      
     // ================
 
-    cout << "TEST 11" << endl;
+    cout << "\n<><><><><><>\n" << "TEST  12" << endl;
 
     //================================================
 
@@ -490,7 +490,7 @@ int main(int argc, char **argv)
 	
     // ================
 
-    cout << "TEST 12" << endl;
+    cout << "\n<><><><><><>\n" << "TEST  13" << endl;
     
     cout << endl;
     cout << "Destroy dummy.03" << endl;
@@ -508,7 +508,7 @@ int main(int argc, char **argv)
 
     // ================
 
-    cout << "TEST 12" << endl;
+    cout << "\n<><><><><><>\n" << "TEST  14" << endl;
 
     iScan = new InsertFileScan("dummy.04", status);
     if (status != OK) 
@@ -536,7 +536,7 @@ int main(int argc, char **argv)
 	
 	// ================
 
-    cout << "TEST 13" << endl;
+    cout << "\n<><><><><><>\n" << "TEST  15" << endl;
 
     //bufMgr->clearBufStats();
     int numDeletes = 0;
@@ -587,7 +587,7 @@ int main(int argc, char **argv)
 	
     // ================
 
-    cout << "TEST 14" << endl;
+    cout << "\n<><><><><><>\n" << "TEST  16" << endl;
 
     // rescan.  should see 1000 fewer records
 
@@ -605,7 +605,7 @@ int main(int argc, char **argv)
 
     // ================
 
-    cout << "TEST 15" << endl;
+    cout << "\n<><><><><><>\n" << "TEST  17" << endl;
 	
 
     // perform filtered scan #1
@@ -651,7 +651,7 @@ int main(int argc, char **argv)
 
     // ================
 
-    cout << "TEST 16" << endl;
+    cout << "\n<><><><><><>\n" << "TEST  18" << endl;
 	
     // perform filtered scan #2
     scan1 = new HeapFileScan("dummy.04", status);
@@ -695,7 +695,7 @@ int main(int argc, char **argv)
 	
 	// ================
 
-    cout << "TEST 17" << endl;
+    cout << "\n<><><><><><>\n" << "TEST  19" << endl;
 
     // open up the heapFile
     file1 = new HeapFile("dummy.04", status);
@@ -725,7 +725,7 @@ int main(int argc, char **argv)
 
     // ================
 
-    cout << "TEST 18" << endl;
+    cout << "\n<><><><><><>\n" << "TEST  20" << endl;
     
     // add insert for bigger than pagesized record
     iScan = new InsertFileScan("dummy.04", status);
