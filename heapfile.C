@@ -464,68 +464,90 @@ InsertFileScan::~InsertFileScan()
 // Insert a record into the file
 const Status InsertFileScan::insertRecord(const Record & rec, RID& outRid)
 {
-    Page*	newPage;
-    Status	status, unpinstatus;
-    RID		rid;
+    Page*   newPage;
+    int     newPageNo;
+    Status  status, unpinstatus;
+    RID     rid;
 
-    // check for very large records
+    // Check for very large records
     if ((unsigned int) rec.length > PAGESIZE-DPFIXED)
     {
-        // will never fit on a page, so don't even bother looking
+        // Will never fit on a page, so don't even bother looking
         return INVALIDRECLEN;
     }
 
-    if (curPage == NULL){
-        if((status = bufMgr->readPage(filePtr, headerPage->lastPage, curPage)) != OK) {
-            cerr << "Error: Failed to read headerPage->lastPage into curPage to create a new curPage" << endl;
+    // If the current page is NULL, make the last page the current page and read it into the buffer
+    if (curPage == nullptr)
+    {
+        status = bufMgr->readPage(filePtr, headerPage->lastPage, curPage);
+        if (status != OK)
+        {
+            cerr << "Error: Failed to read current page " << headerPage->lastPage << " into buffer" << endl;
             return status;
-        } 
-        status = curPage->insertRecord(rec, outRid);
-        if((status = curPage->insertRecord(rec, outRid)) != OK) {
-            cerr << "Error: Failed to insert record into the curPage (lastPage)" << endl;
-            return status;
-        } 
+        }
+    }
+
+    // Try to insert the record into the current page
+    status = curPage->insertRecord(rec, rid);
+    if (status == OK)
+    {
+        // Update data fields
         headerPage->recCnt++;
         hdrDirtyFlag = true;
         curDirtyFlag = true;
-        curRec = outRid;
+        outRid = rid;
+        return OK;
+    }
+    else if (status == NOSPACE)
+    {
+        // Current page is full, create a new page
+        status = bufMgr->allocPage(filePtr, newPageNo, newPage);
+        if (status != OK)
+        {
+            cerr << "Error: Failed to allocate new page for inserting record" << endl;
+            return status;
+        }
 
+        // Initialize the new page
+        status = newPage->init(newPageNo);
+        if (status != OK)
+        {
+            cerr << "Error: Failed to initialize new page for inserting record" << endl;
+            return status;
+        }
+
+        // Link up the new page appropriately
+        curPage->setNextPage(newPageNo);
+        curDirtyFlag = true;
+
+        // Make the current page the newly allocated page
+        curPage = newPage;
+        curPageNo = newPageNo;
+
+        // Try to insert the record into the new page
+        status = curPage->insertRecord(rec, rid);
+        if (status != OK)
+        {
+            cerr << "Error: Failed to insert record into new page" << endl;
+            return status;
+        }
+
+        // Update data fields
+        headerPage->recCnt++;
+        headerPage->pageCnt++;
+        headerPage->lastPage = newPageNo;
+        hdrDirtyFlag = true;
+        curDirtyFlag = true;
+        outRid = rid;
+        return OK;
+    }
+    else
+    {
+        // Other error occurred during insertion
+        cerr << "Error: Failed to insert record into current page" << endl;
         return status;
     }
-
-    // Can't insert into current page, create a new one using one past the current last pageNo
-    newPage = new Page();
-    newPage->init(headerPage->lastPage+1);
-
-    // read the current lastPage into curPage
-    if((status = bufMgr->readPage(filePtr, headerPage->lastPage, curPage)) != OK) {
-        cerr << "Error: Failed to read headerPage->lastPage into curPage" << endl;
-        return status;
-    } 
-    curPage->setNextPage(headerPage->lastPage+1);
-    headerPage->lastPage += 1;
-    headerPage->pageCnt++;
-
-    // Read new last page into curPage
-    if((status = bufMgr->readPage(filePtr, headerPage->lastPage, curPage)) != OK) {
-        cerr << "Error: Failed to read last page into curpage" << endl;
-        return status;
-    }
-    if((status = curPage->insertRecord(rec, outRid)) != OK){
-        cerr << "Error: Failed to insert a record into newly created page" << endl;
-        return status;
-    }
-
-    headerPage->recCnt++;
-    hdrDirtyFlag = true;
-    curDirtyFlag = true;
-    curRec = outRid;
-
-    return status;
-
-    // Which error to return?
-    return RECNOTFOUND; 
-  
 }
+
 
 
