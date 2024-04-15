@@ -592,108 +592,105 @@ InsertFileScan::~InsertFileScan()
     }
 }
 
-// Insert a record into the file
+Just finished my version of insertRecord, <@163095390399234048> check this out. 
+
 const Status InsertFileScan::insertRecord(const Record &rec, RID &outRid)
 {
-    Page *newPage;
-    int newPageNo;
-    Status status, unpinstatus;
-    RID rid;
+    Page *targetPage;
+    int targetPageNo;
+    Status operationStatus, unpinStatus;
+    RID generatedRID;
 
-    // Check for very large records
+    // check for very large records
     if ((unsigned int)rec.length > PAGESIZE - DPFIXED)
     {
-        // Will never fit on a page, so don't even bother looking
+        // will never fit on a page, so don't even bother looking
         return INVALIDRECLEN;
     }
 
-    // If the current page is NULL, make the last page the current page and read it into the buffer
+    // check if curPage is NULL
     if (curPage == NULL)
     {
-        status = bufMgr->readPage(filePtr, headerPage->lastPage, curPage);
-        if (status != OK)
+        // make the last page the current page and read it into the buffer
+        curPageNo = headerPage->lastPage;
+        operationStatus = bufMgr->readPage(filePtr, curPageNo, curPage);
+        if (operationStatus != OK)
         {
-            cerr << "Error: Failed to read current page " << headerPage->lastPage << " into buffer" << endl;
-            return status;
+            return operationStatus;
         }
     }
 
-    // if the current page is not the lastPage
-    if (curPageNo != headerPage->lastPage)
+    // attempt to insert the record into the current page
+    operationStatus = curPage->insertRecord(rec, generatedRID);
+    if (operationStatus == OK)
     {
-        // unpin curpage
-        status = bufMgr->unPinPage(filePtr, curPageNo, true);
-
-        status = bufMgr->readPage(filePtr, headerPage->lastPage, curPage);
-        if (status != OK)
-        {
-            cerr << "Error: Failed to read current page " << headerPage->lastPage << " into buffer" << endl;
-            return status;
-        }
-    }
-
-    // Try to insert the record into the current page
-    status = curPage->insertRecord(rec, rid);
-    if (status == OK)
-    {
-        // Update data fields
+        // update data fields such as recCnt, hdrDirtyFlag, curDirtyFlag, etc.
         headerPage->recCnt++;
         hdrDirtyFlag = true;
         curDirtyFlag = true;
-        outRid = rid;
+        outRid = generatedRID;
 
-        return OK;
+        return operationStatus;
     }
-    else if (status == NOSPACE)
+
+    // create a new page, initialize it properly
+    operationStatus = bufMgr->allocPage(filePtr, targetPageNo, targetPage);
+    if (operationStatus != OK)
     {
-        // Current page is full, create a new page
-        status = bufMgr->allocPage(filePtr, newPageNo, newPage);
-        if (status != OK)
-        {
-            cerr << "Error: Failed to allocate new page for inserting record" << endl;
-            return status;
-        }
+        return operationStatus;
+    }
 
-        // Initialize the new page
-        newPage->init(newPageNo);
-        if (status != OK)
-        {
-            cerr << "Error: Failed to initialize new page for inserting record" << endl;
-            return status;
-        }
+    // initialize the new page
+    targetPage->init(targetPageNo);
+    operationStatus = targetPage->setNextPage(-1); // set next page to -1 because last page
+    if (operationStatus != OK)
+    {
+        return operationStatus;
+    }
 
-        // Link up the new page appropriately
-        curPage->setNextPage(newPageNo);
-        curDirtyFlag = true;
-        status = bufMgr->unPinPage(filePtr, curPageNo, true);
-        // TODO check status
+    // modify the header page AKA bookkeeping
+    headerPage->lastPage = targetPageNo;
+    hdrDirtyFlag = true;
+    headerPage->pageCnt++; // increment pageCnt here because we are allocating a new page
 
-        // Make the current page the newly allocated page
-        curPage = newPage;
-        curPageNo = newPageNo;
+    // setup page
+    operationStatus = curPage->setNextPage(targetPageNo);
+    if (operationStatus != OK)
+    {
+        return operationStatus;
+    }
 
-        // Try to insert the record into the new page
-        status = curPage->insertRecord(rec, rid);
-        if (status != OK)
-        {
-            cerr << "Error: Failed to insert record into new page" << endl;
-            return status;
-        }
+    // unpin the current page
+    operationStatus = bufMgr->unPinPage(filePtr, curPageNo, true);
+    if (operationStatus != OK)
+    {
+        // reset everything to default values and return error
+        curPageNo = -1;
+        curDirtyFlag = false;
+        curPage = NULL;
 
-        // Update data fields
+        unpinStatus = bufMgr->unPinPage(filePtr, targetPageNo, true); // unpin failed page
+
+        // return error
+        return operationStatus;
+    }
+
+    // set new page as current page
+    curPage = targetPage;
+    curPageNo = targetPageNo;
+
+    // try to insert the record into new page
+    operationStatus = curPage->insertRecord(rec, generatedRID);
+    if (operationStatus == OK)
+    {
+        // Successfully inserted the record, so update data fields such as recCnt, hdrDirtyFlag, curDirtyFlag, etc.
         headerPage->recCnt++;
-        headerPage->pageCnt++;
-        headerPage->lastPage = newPageNo;
         hdrDirtyFlag = true;
         curDirtyFlag = true;
-        outRid = rid;
+        outRid = generatedRID;
 
-        return OK;
+        return OK; //poggies
     }
-    else
-    {
-        // Other error occurred during insertion
-        cerr << "Error: Failed to insert record into current page" << endl;
-        return status;
-    }
+
+    return operationStatus;  //not poggers
 }
