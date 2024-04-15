@@ -65,6 +65,10 @@ const Status destroyHeapFile(const string fileName)
 }
 
 // constructor opens the underlying file
+#include "heapfile.h"
+#include "error.h"
+
+// constructor opens the underlying file
 HeapFile::HeapFile(const string & fileName, Status& returnStatus)
 {
     Status 	status;
@@ -74,43 +78,50 @@ HeapFile::HeapFile(const string & fileName, Status& returnStatus)
 
     // open the file and read in the header page and the first data page
     if ((status = db.openFile(fileName, filePtr)) == OK)
-    {	
-		// This method first opens the appropriate file by calling db.openFile() (do not forget to save the File* returned in the filePtr data member). 
-        // Next, it reads and pins the header page for the file in the buffer pool, initializing the private data members headerPage, headerPageNo, and hdrDirtyFlag. 
-        //  You might be wondering how you get the page number of the header page. This is what file->getFirstPage() is used for (see description of the I/O layer)! 
-        // Finally, read and pin the first page of the file into the buffer pool, initializing the values of curPage, curPageNo, and curDirtyFlag appropriately. Set curRec to NULLRID.
-		
+    {
+        Page * hdrPage;
+
         // Get the header page
-        Page* headerPage;
-        int headerPageNo;
-        status = filePtr->getFirstPage(headerPageNo);
-        if (status!=OK) {return;}
+        if((status = filePtr->getFirstPage(headerPageNo)) !=OK ){
+            cerr << "Error: Failed get the page number of the header page of file " << fileName << endl;
+            returnStatus = status;
+            return;
+        }
+
         // Read and pin the header page
-        if ((status = bufMgr->readPage(filePtr, headerPageNo, headerPage)) != OK) {
+        if ((status = bufMgr->readPage(filePtr, headerPageNo, hdrPage)) != OK) {
             cerr << "Error: Failed to read and pin the header page of file " << fileName << endl;
             returnStatus = status;
             return;
         }
-        // int headerPageNo = 0; // Header page number is 0
+        headerPageNo = 0; // Header page number is 0
         hdrDirtyFlag = false; // Header page initially not dirty
 
+        // save headerPage using cast (how does this work?!?!?!?!)
+        headerPage = (FileHdrPage*) hdrPage;
 
-        int firstPageNo;
-        // Get the page number of the first data page from the header page
-        if ((status = filePtr->getFirstPage(firstPageNo)) != OK) {
-            cerr << "Error: Failed to get the first data page number from the header page of file " << fileName << endl;
+        // Get page number of first data page
+        if((status = hdrPage->getNextPage(curPageNo)) !=OK ){
+            cerr << "Error: Failed get the page number of the first data page of file " << fileName << endl;
             returnStatus = status;
             return;
         }
 
-        // Read and pin the first data page (set curPage as well)
-        if ((status = bufMgr->readPage(filePtr, firstPageNo, curPage)) != OK) {
+        // if there is no first page of data, just set curpage as the header page
+        if (curPageNo == headerPageNo) {
+            curPage = hdrPage;
+            curDirtyFlag = false; // Current page initially not dirty
+            curRec = NULLRID; // No current record initially
+            
+            return;
+        }
+
+        // Read and pin the first data page
+        if ((status = bufMgr->readPage(filePtr, curPageNo, curPage)) != OK) {
             cerr << "Error: Failed to read and pin the first data page of file " << fileName << endl;
             returnStatus = status;
             return;
         }
-
-        curPageNo = firstPageNo; // Set current page number
         curDirtyFlag = false; // Current page initially not dirty
         curRec = NULLRID; // No current record initially
     }
@@ -121,6 +132,7 @@ HeapFile::HeapFile(const string & fileName, Status& returnStatus)
 		return;
     }
 }
+
 
 // the destructor closes the file
 HeapFile::~HeapFile()
