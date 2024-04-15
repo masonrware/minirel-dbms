@@ -47,7 +47,7 @@ const Status createHeapFile(const string fileName)
         hdrPage->fileName[sizeof(hdrPage->fileName) - 1] = '\0'; // Ensure null termination
 
         // Mark the header page as dirty and unpin it.
-        status = bufMgr->unPinPage(file, 0, true);
+        // status = bufMgr->unPinPage(file, hdrPageNo, true);
 
 
         cout << "53 -- header info" << endl;
@@ -149,7 +149,7 @@ HeapFile::HeapFile(const string & fileName, Status& returnStatus)
         }
 
         // Read and pin the first data page
-        if ((status = bufMgr->readPage(filePtr, 1, curPage)) != OK) {
+        if ((status = bufMgr->readPage(filePtr, curPageNo, curPage)) != OK) {
             cerr << "Error: Failed to read and pin the first data page of file " << fileName << endl;
             returnStatus = status;
             return;
@@ -212,12 +212,13 @@ const int HeapFile::getRecCnt() const
 
 const Status HeapFile::getRecord(const RID & rid, Record & rec)
 {
-    // cout<< "getRecord. record (" << rid.pageNo << "." << rid.slotNo << ")" << endl;
+    cout<< "getRecord. record (" << rid.pageNo << "." << rid.slotNo << ")" << endl;
    
     Status status;
 
     // Check if the record is on the currently pinned page
     if (rid.pageNo != curPageNo) {
+        cout << 221 << " " << curPageNo << endl;
         // Unpin the current page
         if ((status = bufMgr->unPinPage(filePtr, curPageNo, curDirtyFlag)) != OK) {
             cerr << "Error: Failed to unpin current page while fetching record" << endl;
@@ -461,6 +462,7 @@ InsertFileScan::~InsertFileScan()
     }
 }
 
+// Insert a record into the file
 const Status InsertFileScan::insertRecord(const Record & rec, RID& outRid)
 {
     Page*   newPage;
@@ -476,16 +478,30 @@ const Status InsertFileScan::insertRecord(const Record & rec, RID& outRid)
     }
 
     // If the current page is NULL, make the last page the current page and read it into the buffer
-    if (curPage == nullptr)
+    if (curPage == NULL)
     {
         status = bufMgr->readPage(filePtr, headerPage->lastPage, curPage);
         if (status != OK)
         {
-            cerr << "Error: Failed to read last page " << headerPage->lastPage << " into buffer" << endl;
+            cerr << "Error: Failed to read current page " << headerPage->lastPage << " into buffer" << endl;
             return status;
         }
     }
 
+    // if the current page is not the lastPage
+    if(curPageNo != headerPage->lastPage) {
+        // unpin curpage
+        status = bufMgr->unPinPage(filePtr, curPageNo, true);
+
+        status = bufMgr->readPage(filePtr, headerPage->lastPage, curPage);
+        if (status != OK)
+        {
+            cerr << "Error: Failed to read current page " << headerPage->lastPage << " into buffer" << endl;
+            return status;
+        }
+    }
+
+    
     // Try to insert the record into the current page
     status = curPage->insertRecord(rec, rid);
     if (status == OK)
@@ -496,13 +512,7 @@ const Status InsertFileScan::insertRecord(const Record & rec, RID& outRid)
         curDirtyFlag = true;
         outRid = rid;
 
-        cout << "499 -- header info" << endl;
-        cout << "fileName: " << headerPage->fileName << endl;
-        cout << "firstPage: " << headerPage->firstPage << endl;
-        cout << "lastPage: " << headerPage->lastPage << endl;
-        cout << "pageCnt: " << headerPage->pageCnt << endl;
-        cout << "recCnt: " << headerPage->recCnt << endl;
-        cout << "headerPageNo: " << headerPageNo << endl;
+        cout << 500 << " " << rid.slotNo << endl;
 
         return OK;
     }
@@ -528,8 +538,10 @@ const Status InsertFileScan::insertRecord(const Record & rec, RID& outRid)
         curPage->setNextPage(newPageNo);
         curDirtyFlag = true;
 
+        status = bufMgr->unPinPage(filePtr, curPageNo, true);
+        // TODO check status
+
         // Make the current page the newly allocated page
-        // TODO may have to call readPage here
         curPage = newPage;
         curPageNo = newPageNo;
 
@@ -549,13 +561,7 @@ const Status InsertFileScan::insertRecord(const Record & rec, RID& outRid)
         curDirtyFlag = true;
         outRid = rid;
 
-        cout << "552 -- header info" << endl;
-        cout << "fileName: " << headerPage->fileName << endl;
-        cout << "firstPage: " << headerPage->firstPage << endl;
-        cout << "lastPage: " << headerPage->lastPage << endl;
-        cout << "pageCnt: " << headerPage->pageCnt << endl;
-        cout << "recCnt: " << headerPage->recCnt << endl;
-        cout << "headerPageNo: " << headerPageNo << endl;
+        cout << 549 << " " << outRid.slotNo << endl;
 
         return OK;
     }

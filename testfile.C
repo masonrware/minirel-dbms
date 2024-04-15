@@ -110,7 +110,7 @@ int main(int argc, char **argv)
     	    rec1.f = i;
 
 			// now read the record
-			//printf("getting record (%d.%d)\n",ridArray[i].pageNo, ridArray[i].slotNo);
+			printf("getting record (%d.%d)\n",ridArray[i].pageNo, ridArray[i].slotNo);
 			status = file1->getRecord(ridArray[i], dbrec2);
     	    if (status != OK) error.print(status);
 

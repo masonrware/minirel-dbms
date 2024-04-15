@@ -121,7 +121,7 @@ const Status BufMgr::allocBuf(int & frame)
         bufStats.diskwrites++;
 
         status = bufTable[clockHand].file->writePage(bufTable[clockHand].pageNo,
-                                                     &bufPool[clockHand]);
+                                                     &bufPool[clockHand]);                                             
         if (status != OK) return status;
     }
 
@@ -259,7 +259,7 @@ const Status BufMgr::allocPage(File* file, int& pageNo, Page*& page)
     // allocate a new page in the file
     Status status = file->allocatePage(pageNo);
     if (status != OK)  return status; 
-
+    
     // alloc a new frame
      status = allocBuf(frameNo);
      if (status != OK) return status;
@@ -271,6 +271,7 @@ const Status BufMgr::allocPage(File* file, int& pageNo, Page*& page)
      // insert in thehash table
      status = hashTable->insert(file, pageNo, frameNo);
      if (status != OK) { return status; }
+
      // cout << "allocated page " << pageNo <<  " to file " << file << "frame is: " << frameNo  << endl;
     return OK;
 }

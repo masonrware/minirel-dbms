@@ -99,6 +99,8 @@ const Status Page::insertRecord(const Record & rec, RID& rid)
 	tmpRid.slotNo = -i; // make a positive slot number
 	rid = tmpRid;
 
+	cout << 102 << " " << slotCnt << endl;
+
 	return OK;
     }
 }
@@ -242,12 +244,14 @@ const Status Page::getRecord(const RID & rid, Record & rec)
     int	slotNo = rid.slotNo;
     int offset;
 
+	cout << -slotNo << " " << slotCnt << " " << slot[-slotNo].length << endl;
+
     if (((-slotNo) > slotCnt) && (slot[-slotNo].length > 0))
     {
         offset = slot[-slotNo].offset; // extract offset in data[]
         rec.data = &data[offset];  // return pointer to actual record
         rec.length = slot[-slotNo].length; // return length of record
-	return OK;
+		return OK;
     }
     else return INVALIDSLOTNO;
 }
