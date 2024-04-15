@@ -79,8 +79,6 @@ HeapFile::HeapFile(const string & fileName, Status& returnStatus)
     // open the file and read in the header page and the first data page
     if ((status = db.openFile(fileName, filePtr)) == OK)
     {
-        // createHeapFile(fileName);
-
         Page * hdrPage;
         // Get the header page
         if((status = filePtr->getFirstPage(headerPageNo)) !=OK ){
@@ -97,8 +95,6 @@ HeapFile::HeapFile(const string & fileName, Status& returnStatus)
         }
         // headerPageNo = 0; // Header page number is 0
         hdrDirtyFlag = false; // Header page initially not dirty
-
-        // save headerPage using cast (how does this work?!?!?!?!)
         headerPage = (FileHdrPage*) hdrPage;
 
         // Get page number of first data page
@@ -107,16 +103,7 @@ HeapFile::HeapFile(const string & fileName, Status& returnStatus)
             returnStatus = status;
             return;
         }
-
-        // if there is no first page of data, just set curpage as the header page
-        if (curPageNo == headerPageNo) {
-            curPage = hdrPage;
-            curDirtyFlag = false; // Current page initially not dirty
-            curRec = NULLRID; // No current record initially
-            
-            return;
-        }
-
+        
         // Read and pin the first data page
         if ((status = bufMgr->readPage(filePtr, curPageNo, curPage)) != OK) {
             cerr << "Error: Failed to read and pin the first data page of file " << fileName << endl;
