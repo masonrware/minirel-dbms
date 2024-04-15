@@ -79,8 +79,9 @@ HeapFile::HeapFile(const string & fileName, Status& returnStatus)
     // open the file and read in the header page and the first data page
     if ((status = db.openFile(fileName, filePtr)) == OK)
     {
-        Page * hdrPage;
+        createHeapFile(fileName);
 
+        Page * hdrPage;
         // Get the header page
         if((status = filePtr->getFirstPage(headerPageNo)) !=OK ){
             cerr << "Error: Failed get the page number of the header page of file " << fileName << endl;
@@ -94,7 +95,7 @@ HeapFile::HeapFile(const string & fileName, Status& returnStatus)
             returnStatus = status;
             return;
         }
-        headerPageNo = 0; // Header page number is 0
+        // headerPageNo = 0; // Header page number is 0
         hdrDirtyFlag = false; // Header page initially not dirty
 
         // save headerPage using cast (how does this work?!?!?!?!)
