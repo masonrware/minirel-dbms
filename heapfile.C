@@ -531,7 +531,8 @@ const Status InsertFileScan::insertRecord(const Record & rec, RID& outRid)
         curPageNo = newPageNo;
 
         // Try to insert the record into the new page
-        status = curPage->insertRecord(rec, rid);
+        RID* ridptr = &rid;
+        status = curPage->insertRecord(rec, *ridptr);
         if (status != OK)
         {
             cerr << "Error: Failed to insert record into new page" << endl;
@@ -544,7 +545,7 @@ const Status InsertFileScan::insertRecord(const Record & rec, RID& outRid)
         headerPage->lastPage = newPageNo;
         hdrDirtyFlag = true;
         curDirtyFlag = true;
-        outRid = rid;
+        outRid = *ridptr;
 
         cout << 549 << " " << outRid.slotNo << endl;
 
