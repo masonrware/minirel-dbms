@@ -149,7 +149,7 @@ HeapFile::HeapFile(const string & fileName, Status& returnStatus)
         }
 
         // Read and pin the first data page
-        if ((status = bufMgr->readPage(filePtr, 1, curPage)) != OK) {
+        if ((status = bufMgr->readPage(filePtr, curPageNo, curPage)) != OK) {
             cerr << "Error: Failed to read and pin the first data page of file " << fileName << endl;
             returnStatus = status;
             return;
