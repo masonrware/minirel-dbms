@@ -338,6 +338,7 @@ const Status HeapFileScan::scanNext(RID &outRid)
     // make sure currentpage is valid (curPageNo is not -1)
     if (curPageNo < 0)
     {
+        cout << 341 << endl;
         return FILEEOF; // no more records in the file stop iterating
     }
 
