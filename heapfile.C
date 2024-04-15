@@ -437,12 +437,16 @@ const Status InsertFileScan::insertRecord(const Record & rec, RID& outRid)
     Status	status, unpinstatus;
     RID		rid;
 
+    cout << 440;
+
     // check for very large records
     if ((unsigned int) rec.length > PAGESIZE-DPFIXED)
     {
         // will never fit on a page, so don't even bother looking
         return INVALIDRECLEN;
     }
+
+    cout << 448;
 
     if (curPage == NULL){
         status = bufMgr->readPage(filePtr, headerPage->lastPage, curPage);
@@ -458,6 +462,8 @@ const Status InsertFileScan::insertRecord(const Record & rec, RID& outRid)
         }
         
     }
+
+    cout << 466;
 
     // Can't insert into current page, create a new one
     newPage = new Page();
