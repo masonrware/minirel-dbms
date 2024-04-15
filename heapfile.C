@@ -62,6 +62,7 @@ const Status createHeapFile(const string fileName)
         status = bufMgr->unPinPage(file, hdrPageNo, true);
         if (status != OK)
         {
+            cout << 65 << endl;
             cerr << "Error: Failed to unpin header page for file " << fileName << endl;
             return status;
         }
