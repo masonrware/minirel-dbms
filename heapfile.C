@@ -500,7 +500,7 @@ const Status InsertFileScan::insertRecord(const Record & rec, RID& outRid)
         //TODO unpin page?
         status = bufMgr->unPinPage(filePtr, curPageNo, true);
         curPage = NULL;
-        curPageNo = 0;
+        // curPageNo = 0;
         if (status != OK) cerr << "error in unpin of data page\n";
 
         return OK;
