@@ -38,8 +38,8 @@ const Status createHeapFile(const string fileName)
         // Initialize the header page values.
         strncpy(hdrPage->fileName, fileName.c_str(), MAXNAMESIZE - 1);
         hdrPage->fileName[MAXNAMESIZE - 1] = '\0'; // Ensure null termination
-        hdrPage->firstPage = hdrPageNo; // Initialize to an invalid page number
-        hdrPage->lastPage = hdrPageNo;  // Initialize to an invalid page number
+        hdrPage->firstPage = -1; // Initialize to an invalid page number
+        hdrPage->lastPage = -1;  // Initialize to an invalid page number
         hdrPage->pageCnt = 0; // Initially, there are no pages
         hdrPage->recCnt = 0;  // Initially, there are no records
         // Set the fileName field of the header page.
@@ -50,7 +50,7 @@ const Status createHeapFile(const string fileName)
         status = bufMgr->unPinPage(file, 0, true);
 
 
-        cout << "header info" << endl;
+        cout << "53 -- header info" << endl;
         cout << "fileName: " << hdrPage->fileName << endl;
         cout << "firstPage: " << hdrPage->firstPage << endl;
         cout << "lastPage: " << hdrPage->lastPage << endl;
@@ -131,10 +131,10 @@ HeapFile::HeapFile(const string & fileName, Status& returnStatus)
             return;
         }
         hdrDirtyFlag = false; // Header page initially not dirty
-        // headerPage = reinterpret_cast<FileHdrPage*>(hdrPage);
-        headerPage = (FileHdrPage *) hdrPage;
+        headerPage = reinterpret_cast<FileHdrPage*>(hdrPage);
+        // headerPage = (FileHdrPage *) hdrPage;
 
-        cout << "header info" << endl;
+        cout << "137 -- header info" << endl;
         cout << "fileName: " << headerPage->fileName << endl;
         cout << "firstPage: " << headerPage->firstPage << endl;
         cout << "lastPage: " << headerPage->lastPage << endl;
@@ -510,7 +510,7 @@ const Status InsertFileScan::insertRecord(const Record & rec, RID& outRid)
 
     // Read new last page into curPage
     if((status = bufMgr->readPage(filePtr, headerPage->lastPage, curPage)) != OK) {
-        cerr << "Error: Failed to unpin current page while fetching record" << endl;
+        cerr << "Error: Failed to read last page into curpage" << endl;
         return status;
     }
     if((status = curPage->insertRecord(rec, outRid)) != OK){
