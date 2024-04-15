@@ -32,10 +32,8 @@ const Status createHeapFile(const string fileName)
             return status;
         }
 
-        cout << "og name: " << ((FileHdrPage*) newPage)->fileName << endl;
-
         // Cast the empty page to FileHdrPage.
-        hdrPage = (FileHdrPage*)newPage;
+        hdrPage = reinterpret_cast<FileHdrPage*>(newPage);
 
 
         // Initialize the header page values.
