@@ -53,7 +53,8 @@ const Status createHeapFile(const string fileName)
         // Flush and close file
         bufMgr->flushFile(file);
         db.closeFile(file);
-		
+
+        return OK;
     }
     return (FILEEXISTS);
 }
