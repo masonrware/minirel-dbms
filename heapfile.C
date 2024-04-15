@@ -328,32 +328,57 @@ const Status HeapFileScan::resetScan()
 
 const Status HeapFileScan::scanNext(RID& outRid)
 {
-    Status 	status = OK;
+    Status status = OK;
     RID		nextRid;
     RID		tmpRid;
     int 	nextPageNo;
     Record      rec;
 
-    // Do we start on first page of file?
-        // check if curPage is null? or curRec?
-            // if curPage is null do we set to first page?
-            // or is it null when we reach the end of the file
+    // Check if the current page is NULL
+    if (curPage == nullptr) {
+        // If curPage is NULL, get the first page in the file
+        status = headerPage->firstPage;
+        if (status != OK) {
+            cerr << "Error: Failed to get the first page in the file" << endl;
+            return status;
+        }
+    }
 
-    // curRec
-	// matchRec - see if record matches scan filter (true / false)
-        // convert RID to pointer to rec data first
+    // Loop through each page in the file
+    while (curPageNo != -1) {
+        // Get the next record on the current page
+        status = curPage->nextRecord(curRec, nextRid);
+        if (status == OK) {
+            // Check if the current record matches the scan predicate
+            if (matchRec(rec)) {
+                // If the record matches, store its RID in outRid and return
+                outRid = nextRid;
+                return OK;
+            }
+        } else if (status == ENDOFPAGE) {
+            // If we've reached the end of the current page, move to the next page
+            nextPageNo = curPage->getNextPage(nextPageNo);
+            if (nextPageNo != -1) {
+                status = bufMgr->readPage(filePtr, nextPageNo, curPage);
+                if (status != OK) {
+                    cerr << "Error: Failed to read the next page in the file" << endl;
+                    return status;
+                }
+                curPageNo = nextPageNo;
+                // Reset the current record pointer to the beginning of the page
+                curRec = NULLRID;
+            } else {
+                // If there are no more pages in the file, return ENDOFFILE
+                return FILEEOF;
+            }
+        } else {
+            // If an error occurred while reading the current page, return the error status
+            cerr << "Error: Failed to read the current page in the file" << endl;
+            return status;
+        }
+    }
 
-	// Page->getNextPage - return pageNum of next page
-        // then use bufMgr->readPage to read next page into curPage
-        // read page sets pin count to 1 (?)
-	
-	// set outRid to curRec if it matches search
-    // return OK if no errors, otherwise first error that occurs
-	
-	
-	
-	
-	
+    return OK;
 }
 
 
