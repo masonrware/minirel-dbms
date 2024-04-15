@@ -38,8 +38,8 @@ const Status createHeapFile(const string fileName)
         // Initialize the header page values.
         strncpy(hdrPage->fileName, fileName.c_str(), MAXNAMESIZE - 1);
         hdrPage->fileName[MAXNAMESIZE - 1] = '\0'; // Ensure null termination
-        hdrPage->firstPage = hdrPageNo; // Initialize to an invalid page number
-        hdrPage->lastPage = hdrPageNo;  // Initialize to an invalid page number
+        hdrPage->firstPage = -1; // Initialize to an invalid page number
+        hdrPage->lastPage = -1;  // Initialize to an invalid page number
         hdrPage->pageCnt = 0; // Initially, there are no pages
         hdrPage->recCnt = 0;  // Initially, there are no records
         // Set the fileName field of the header page.
@@ -47,10 +47,10 @@ const Status createHeapFile(const string fileName)
         hdrPage->fileName[sizeof(hdrPage->fileName) - 1] = '\0'; // Ensure null termination
 
         // Mark the header page as dirty and unpin it.
-        status = bufMgr->unPinPage(file, hdrPageNo, true);
+        status = bufMgr->unPinPage(file, 0, true);
 
 
-        cout << "header info" << endl;
+        cout << "53 -- header info" << endl;
         cout << "fileName: " << hdrPage->fileName << endl;
         cout << "firstPage: " << hdrPage->firstPage << endl;
         cout << "lastPage: " << hdrPage->lastPage << endl;
@@ -131,14 +131,15 @@ HeapFile::HeapFile(const string & fileName, Status& returnStatus)
             return;
         }
         hdrDirtyFlag = false; // Header page initially not dirty
-        headerPage = (FileHdrPage*) hdrPage;
+        headerPage = reinterpret_cast<FileHdrPage*>(hdrPage);
 
-        cout << "header info" << endl;
+        cout << "137 -- header info" << endl;
         cout << "fileName: " << headerPage->fileName << endl;
         cout << "firstPage: " << headerPage->firstPage << endl;
         cout << "lastPage: " << headerPage->lastPage << endl;
         cout << "pageCnt: " << headerPage->pageCnt << endl;
         cout << "recCnt: " << headerPage->recCnt << endl;
+        cout << "headerPageNo: " << headerPageNo << endl;
 
         // Get page number of first data page
         if((status = hdrPage->getNextPage(curPageNo)) !=OK ){
@@ -148,7 +149,7 @@ HeapFile::HeapFile(const string & fileName, Status& returnStatus)
         }
 
         // Read and pin the first data page
-        if ((status = bufMgr->readPage(filePtr, curPageNo, curPage)) != OK) {
+        if ((status = bufMgr->readPage(filePtr, 1, curPage)) != OK) {
             cerr << "Error: Failed to read and pin the first data page of file " << fileName << endl;
             returnStatus = status;
             return;
@@ -497,7 +498,6 @@ const Status InsertFileScan::insertRecord(const Record & rec, RID& outRid)
     newPage->init(headerPage->lastPage+1);
 
     // read the current lastPage into curPage
-    cout << "fileName: " << headerPage->fileName << "\nfirstPage: " << headerPage->firstPage << "\nlastPage: " << headerPage->lastPage << "\nPageCnt: " << headerPage->pageCnt << "\nRecCnt: " << headerPage->recCnt << endl;
     if((status = bufMgr->readPage(filePtr, headerPage->lastPage, curPage)) != OK) {
         cerr << "Error: Failed to read headerPage->lastPage into curPage" << endl;
         return status;
@@ -508,7 +508,7 @@ const Status InsertFileScan::insertRecord(const Record & rec, RID& outRid)
 
     // Read new last page into curPage
     if((status = bufMgr->readPage(filePtr, headerPage->lastPage, curPage)) != OK) {
-        cerr << "Error: Failed to unpin current page while fetching record" << endl;
+        cerr << "Error: Failed to read last page into curpage" << endl;
         return status;
     }
     if((status = curPage->insertRecord(rec, outRid)) != OK){
