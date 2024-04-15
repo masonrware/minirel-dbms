@@ -88,8 +88,6 @@ HeapFile::HeapFile(const string & fileName, Status& returnStatus)
             return;
         }
 
-        cout << "headerPage number: " << headerPageNo << endl;
-
         // Read and pin the header page
         if ((status = bufMgr->readPage(filePtr, headerPageNo, hdrPage)) != OK) {
             cerr << "Error: Failed to read and pin the header page of file " << fileName << endl;
@@ -99,15 +97,19 @@ HeapFile::HeapFile(const string & fileName, Status& returnStatus)
         hdrDirtyFlag = false; // Header page initially not dirty
         headerPage = (FileHdrPage*) hdrPage;
 
+        cout << "header info" << endl;
+        cout << "fileName: " << headerPage->fileName;
+        cout << "firstPage: " << headerPage->firstPage;
+        cout << "lastPage: " << headerPage->lastPage;
+        cout << "pageCnt: " << headerPage->pageCnt;
+        cout << "recCnt: " << headerPage->recCnt;
+
         // Get page number of first data page
         if((status = hdrPage->getNextPage(curPageNo)) !=OK ){
             cerr << "Error: Failed get the page number of the first data page of file " << fileName << endl;
             returnStatus = status;
             return;
         }
-
-        cout << "first page number: " << curPageNo << endl;
-
 
         // Read and pin the first data page
         if ((status = bufMgr->readPage(filePtr, curPageNo, curPage)) != OK) {
