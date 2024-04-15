@@ -130,8 +130,7 @@ HeapFile::HeapFile(const string & fileName, Status& returnStatus)
             returnStatus = status;
             return;
         }
-        // hdrDirtyFlag = false; // Header page initially not dirty
-        hdrDirtyFlag = true;
+        hdrDirtyFlag = false; // Header page initially not dirty
         headerPage = reinterpret_cast<FileHdrPage*>(hdrPage);
 
         cout << "137 -- header info" << endl;
@@ -155,8 +154,7 @@ HeapFile::HeapFile(const string & fileName, Status& returnStatus)
             returnStatus = status;
             return;
         }
-        // curDirtyFlag = false; // Current page initially not dirty
-        curDirtyFlag = true;
+        curDirtyFlag = false; // Current page initially not dirty
         curRec = NULLRID; // No current record initially
     }
     else
@@ -231,7 +229,7 @@ const Status HeapFile::getRecord(const RID & rid, Record & rec)
             return status;
         }
         curPageNo = rid.pageNo; // Update current page number
-        curDirtyFlag = false; // Current page initially not dirty
+        curDirtyFlag = true; // Current page initially not dirty
     }
 
     // Fetch the record from the current page
