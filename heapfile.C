@@ -546,7 +546,6 @@ const Status InsertFileScan::insertRecord(const Record & rec, RID& outRid)
         curDirtyFlag = true;
         outRid = rid;
 
-        outRid.slotNo += 1;
         cout << 549 << " " << outRid.slotNo << endl;
 
         return OK;
