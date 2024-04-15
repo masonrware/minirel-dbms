@@ -99,8 +99,6 @@ const Status Page::insertRecord(const Record & rec, RID& rid)
 	tmpRid.slotNo = -i; // make a positive slot number
 	rid = tmpRid;
 
-	cout << 102 << " " << slotCnt << endl;
-
 	return OK;
     }
 }

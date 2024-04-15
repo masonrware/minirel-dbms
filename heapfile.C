@@ -512,8 +512,6 @@ const Status InsertFileScan::insertRecord(const Record & rec, RID& outRid)
         curDirtyFlag = true;
         outRid = rid;
 
-        cout << 500 << " " << rid.slotNo << endl;
-
         return OK;
     }
     else if (status == NOSPACE)
@@ -560,8 +558,6 @@ const Status InsertFileScan::insertRecord(const Record & rec, RID& outRid)
         hdrDirtyFlag = true;
         curDirtyFlag = true;
         outRid = rid;
-
-        cout << 549 << " " << outRid.slotNo << endl;
 
         return OK;
     }
