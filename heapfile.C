@@ -337,11 +337,7 @@ const Status HeapFileScan::scanNext(RID& outRid)
     // Check if the current page is NULL
     if (curPage == nullptr) {
         // If curPage is NULL, get the first page in the file
-        status = headerPage->firstPage;
-        if (status != OK) {
-            cerr << "Error: Failed to get the first page in the file" << endl;
-            return status;
-        }
+        curPageNo = headerPage->firstPage;
     }
 
     // Loop through each page in the file
