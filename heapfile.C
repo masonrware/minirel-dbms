@@ -219,7 +219,6 @@ const Status HeapFile::getRecord(const RID & rid, Record & rec)
 
     // Check if the record is on the currently pinned page
     if (rid.pageNo != curPageNo) {
-        cout << 221 << " " << curPageNo << endl;
         // Unpin the current page
         if ((status = bufMgr->unPinPage(filePtr, curPageNo, curDirtyFlag)) != OK) {
             cerr << "Error: Failed to unpin current page while fetching record" << endl;
