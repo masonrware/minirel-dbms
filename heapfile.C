@@ -35,11 +35,21 @@ const Status createHeapFile(const string fileName)
         // Cast the empty page to FileHdrPage.
         hdrPage = reinterpret_cast<FileHdrPage*>(newPage);
 
-
         // Initialize the header page values.
-        // hdrPage->nextPage = Page::INVALID_NUMBER;
-        // hdrPage->prevPage = Page::INVALID_NUMBER;
-        // hdrPage->numOfSlots = 0;
+        strncpy(hdrPage->fileName, fileName.c_str(), MAXNAMESIZE - 1);
+        hdrPage->fileName[MAXNAMESIZE - 1] = '\0'; // Ensure null termination
+        hdrPage->firstPage = -1; // Initialize to an invalid page number
+        hdrPage->lastPage = -1;  // Initialize to an invalid page number
+        hdrPage->pageCnt = 0; // Initially, there are no pages
+        hdrPage->recCnt = 0;  // Initially, there are no records
+        // Set the fileName field of the header page.
+        strncpy(hdrPage->fileName, fileName.c_str(), sizeof(hdrPage->fileName) - 1);
+        hdrPage->fileName[sizeof(hdrPage->fileName) - 1] = '\0'; // Ensure null termination
+
+        // Mark the header page as dirty and unpin it.
+        status = bufMgr->unPinPage(file, hdrPageNo, true);
+
+
         cout << "header info" << endl;
         cout << "fileName: " << hdrPage->fileName << endl;
         cout << "firstPage: " << hdrPage->firstPage << endl;
