@@ -96,7 +96,7 @@ HeapFile::HeapFile(const string & fileName, Status& returnStatus)
         hdrDirtyFlag = false; // Header page initially not dirty
         headerPage = (FileHdrPage*) hdrPage;
 
-        cout << headerPage->fileName << endl;
+        cout << "file name: " << headerPage->fileName << endl;
 
         // Get page number of first data page
         if((status = hdrPage->getNextPage(curPageNo)) !=OK ){
