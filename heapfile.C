@@ -348,6 +348,7 @@ const Status HeapFileScan::scanNext(RID &outRid)
         curPageNo = headerPage->firstPage;
         if (headerPage->firstPage == -1) // meaning its -1 as stated in createHeapFile
         {
+            cout << 351 << endl;
             return FILEEOF; // no more records in the file stop iterating
         }
 
@@ -379,6 +380,7 @@ const Status HeapFileScan::scanNext(RID &outRid)
             // heap file bookkeeping...
             curPageNo = -1; // is invalid now dont iterate anymore
             curPage = NULL; // done scanning
+            cout << 383 << endl;
             return FILEEOF; // no more records in the file we done
         }
 
@@ -432,6 +434,7 @@ const Status HeapFileScan::scanNext(RID &outRid)
                 if (nextPageNo == -1) // as stated in createHeapFile
                 {
                     // no more pages in the file return EOF last page
+                    cout << 437 << endl;
                     return FILEEOF;
                 }
 
