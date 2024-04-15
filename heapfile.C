@@ -509,7 +509,7 @@ const Status InsertFileScan::insertRecord(const Record & rec, RID& outRid)
         }
 
         // Initialize the new page
-        status = newPage->init(newPageNo);
+        newPage->init(newPageNo);
         if (status != OK)
         {
             cerr << "Error: Failed to initialize new page for inserting record" << endl;
