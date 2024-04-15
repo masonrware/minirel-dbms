@@ -132,7 +132,6 @@ HeapFile::HeapFile(const string & fileName, Status& returnStatus)
         }
         hdrDirtyFlag = false; // Header page initially not dirty
         headerPage = reinterpret_cast<FileHdrPage*>(hdrPage);
-        // headerPage = (FileHdrPage *) hdrPage;
 
         cout << "137 -- header info" << endl;
         cout << "fileName: " << headerPage->fileName << endl;
@@ -499,7 +498,6 @@ const Status InsertFileScan::insertRecord(const Record & rec, RID& outRid)
     newPage->init(headerPage->lastPage+1);
 
     // read the current lastPage into curPage
-    cout << "fileName: " << headerPage->fileName << "\nfirstPage: " << headerPage->firstPage << "\nlastPage: " << headerPage->lastPage << "\nPageCnt: " << headerPage->pageCnt << "\nRecCnt: " << headerPage->recCnt << endl;
     if((status = bufMgr->readPage(filePtr, headerPage->lastPage, curPage)) != OK) {
         cerr << "Error: Failed to read headerPage->lastPage into curPage" << endl;
         return status;
