@@ -433,7 +433,6 @@ InsertFileScan::~InsertFileScan()
 const Status InsertFileScan::insertRecord(const Record & rec, RID& outRid)
 {
     Page*	newPage;
-    int		newPageNo;
     Status	status, unpinstatus;
     RID		rid;
 
@@ -445,36 +444,15 @@ const Status InsertFileScan::insertRecord(const Record & rec, RID& outRid)
     }
 
     if (curPage == NULL){
-        status = bufMgr->readPage(filePtr, headerPage->lastPage, curPage);
-        status = curPage->insertRecord(rec, outRid);
-
-        if (status == OK){          // Bookkeeping 
-            headerPage->recCnt++;
-            hdrDirtyFlag = true;
-            curDirtyFlag = true;
-            curRec = outRid;
-
+        if((status = bufMgr->readPage(filePtr, headerPage->lastPage, curPage)) != OK) {
+            cerr << "Error: Failed to read headerPage->lastPage into curPage to create a new curPage" << endl;
             return status;
-        }
-        
-    }
-
-    // Can't insert into current page, create a new one
-    newPage = new Page();
-    newPage->init(newPageNo);
-
-    status = bufMgr->readPage(filePtr, headerPage->lastPage, curPage);
-    cout << 467 << "\n";
-    
-    curPage->setNextPage(newPageNo);
-    headerPage->lastPage = newPageNo;
-    headerPage->pageCnt++;
-
-    // Last page should now be newly alloc'd page
-    status = bufMgr->readPage(filePtr, headerPage->lastPage, curPage);
-    status = curPage->insertRecord(rec, outRid);
-
-    if (status == OK){          // Bookkeeping 
+        } 
+        status = curPage->insertRecord(rec, outRid);
+        if((status = curPage->insertRecord(rec, outRid)) != OK) {
+            cerr << "Error: Failed to insert record into the curPage (lastPage)" << endl;
+            return status;
+        } 
         headerPage->recCnt++;
         hdrDirtyFlag = true;
         curDirtyFlag = true;
@@ -482,6 +460,36 @@ const Status InsertFileScan::insertRecord(const Record & rec, RID& outRid)
 
         return status;
     }
+
+    // Can't insert into current page, create a new one using one past the current last pageNo
+    newPage = new Page();
+    newPage->init(headerPage->lastPage+1);
+
+    // read the current lastPage into curPage
+    if((status = bufMgr->readPage(filePtr, headerPage->lastPage, curPage)) != OK) {
+        cerr << "Error: Failed to read headerPage->lastPage into curPage" << endl;
+        return status;
+    } 
+    curPage->setNextPage(headerPage->lastPage+1);
+    headerPage->lastPage += 1;
+    headerPage->pageCnt++;
+
+    // Read new last page into curPage
+    if((status = bufMgr->readPage(filePtr, headerPage->lastPage, curPage)) != OK) {
+        cerr << "Error: Failed to unpin current page while fetching record" << endl;
+        return status;
+    }
+    if((status = curPage->insertRecord(rec, outRid)) != OK){
+        cerr << "Error: Failed to insert a record into newly created page" << endl;
+        return status;
+    }
+
+    headerPage->recCnt++;
+    hdrDirtyFlag = true;
+    curDirtyFlag = true;
+    curRec = outRid;
+
+    return status;
 
     // Which error to return?
     return RECNOTFOUND; 
