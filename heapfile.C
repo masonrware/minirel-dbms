@@ -338,7 +338,7 @@ const Status HeapFileScan::scanNext(RID &outRid)
     // Check if the current page is NULL
     if (curPage == nullptr) {
         // If curPage is NULL, get the first page in the file
-        status = firstPage();
+        status = bufMgr->readPage(filePtr, headerPage->firstPage, curPage);
         if (status != OK) {
             cerr << "Error: Failed to get the first page in the file" << endl;
             return status;
