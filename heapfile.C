@@ -592,8 +592,6 @@ InsertFileScan::~InsertFileScan()
     }
 }
 
-Just finished my version of insertRecord, <@163095390399234048> check this out. 
-
 const Status InsertFileScan::insertRecord(const Record &rec, RID &outRid)
 {
     Page *targetPage;
