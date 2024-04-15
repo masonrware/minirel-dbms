@@ -1,71 +1,153 @@
 #include "heapfile.h"
 #include "error.h"
 
-// routine to create a heapfile
+// // routine to create a heapfile
+// const Status createHeapFile(const string fileName)
+// {
+//     File* 		file;
+//     Status 		status;
+//     FileHdrPage*	hdrPage;
+//     int			hdrPageNo;
+//     int			newPageNo;
+//     Page*		newPage;
+
+//     // try to open the file. This should return an error
+//     status = db.openFile(fileName, file);
+//     if (status != OK)
+//     {
+// 		// Create db level file
+// 		status = db.createFile(fileName);
+// 		status = db.openFile(fileName, file);
+
+//         // Alloc page in file for file header
+// 		status = bufMgr->allocPage(file, hdrPageNo, newPage);
+		
+// 		FileHdrPage* pagePtr = (FileHdrPage*) newPage;
+
+//         // Initialize values of header page
+//         hdrPage = new FileHdrPage();
+// 		// strcpy(hdrPage->fileName, pagePtr->fileName, MAXNAMESIZE);
+
+//         // strcpy being weird, copying by character, null terminator?
+//         for (int i = 0; i < MAXNAMESIZE; i++){
+//             hdrPage->fileName[i] = pagePtr->fileName[i];
+//         }
+
+// 		hdrPage->firstPage = pagePtr->firstPage;
+//         hdrPage->lastPage = pagePtr->lastPage;
+// 		hdrPage->pageCnt = pagePtr->pageCnt;
+// 		hdrPage->recCnt = pagePtr->recCnt;
+
+
+//         cout << "header info" << endl;
+//         cout << "fileName: " << pagePtr->fileName << endl;
+//         cout << "firstPage: " << hdrPage->firstPage << endl;
+//         cout << "lastPage: " << hdrPage->lastPage << endl;
+//         cout << "pageCnt: " << hdrPage->pageCnt << endl;
+//         cout << "recCnt: " << hdrPage->recCnt << endl;
+
+//         // Allocate first data page
+// 		status = bufMgr->allocPage(file, newPageNo, newPage);
+//         newPage->init(newPageNo);
+
+//         // Set header first/last pages to number of new page
+//         hdrPage->firstPage = newPageNo;
+// 		hdrPage->lastPage = newPageNo;
+
+//         // Unpin pages (?)
+//         bufMgr->unPinPage(file, hdrPageNo, true);
+//         bufMgr->unPinPage(file, newPageNo, true);
+
+//         // Flush and close file
+//         bufMgr->flushFile(file);
+//         db.closeFile(file);
+
+//         return OK;
+//     }
+//     return (FILEEXISTS);
+// }
+
 const Status createHeapFile(const string fileName)
 {
-    File* 		file;
-    Status 		status;
-    FileHdrPage*	hdrPage;
-    int			hdrPageNo;
-    int			newPageNo;
-    Page*		newPage;
+    File* file;
+    Status status;
+    FileHdrPage* hdrPage;
+    int hdrPageNo;
+    int newPageNo;
+    Page* newPage;
 
-    // try to open the file. This should return an error
+    // Try to open the file. This should return an error if the file doesn't exist.
     status = db.openFile(fileName, file);
     if (status != OK)
     {
-		// Create db level file
-		status = db.createFile(fileName);
-		status = db.openFile(fileName, file);
-
-        // Alloc page in file for file header
-		status = bufMgr->allocPage(file, hdrPageNo, newPage);
-		
-		FileHdrPage* pagePtr = (FileHdrPage*) newPage;
-
-        // Initialize values of header page
-        hdrPage = new FileHdrPage();
-		// strcpy(hdrPage->fileName, pagePtr->fileName, MAXNAMESIZE);
-
-        // strcpy being weird, copying by character, null terminator?
-        for (int i = 0; i < MAXNAMESIZE; i++){
-            hdrPage->fileName[i] = pagePtr->fileName[i];
+        // File doesn't exist. First create it and allocate an empty header page.
+        status = db.createFile(fileName);
+        if (status != OK)
+        {
+            cerr << "Error: Failed to create file " << fileName << endl;
+            return status;
         }
 
-		hdrPage->firstPage = pagePtr->firstPage;
-        hdrPage->lastPage = pagePtr->lastPage;
-		hdrPage->pageCnt = pagePtr->pageCnt;
-		hdrPage->recCnt = pagePtr->recCnt;
+        // Allocate an empty page for the header.
+        status = bufMgr->allocPage(file, hdrPageNo, newPage);
+        if (status != OK)
+        {
+            cerr << "Error: Failed to allocate header page for file " << fileName << endl;
+            return status;
+        }
+
+        // Cast the empty page to FileHdrPage.
+        hdrPage = (FileHdrPage*)newPage;
 
 
+        // Initialize the header page values.
+        // hdrPage->nextPage = Page::INVALID_NUMBER;
+        // hdrPage->prevPage = Page::INVALID_NUMBER;
+        // hdrPage->numOfSlots = 0;
         cout << "header info" << endl;
-        cout << "fileName: " << pagePtr->fileName << endl;
+        cout << "fileName: " << hdrPage->fileName << endl;
         cout << "firstPage: " << hdrPage->firstPage << endl;
         cout << "lastPage: " << hdrPage->lastPage << endl;
         cout << "pageCnt: " << hdrPage->pageCnt << endl;
         cout << "recCnt: " << hdrPage->recCnt << endl;
 
-        // Allocate first data page
-		status = bufMgr->allocPage(file, newPageNo, newPage);
+
+        // Mark the header page as dirty and unpin it.
+        status = bufMgr->unPinPage(file, hdrPageNo, true);
+        if (status != OK)
+        {
+            cerr << "Error: Failed to unpin header page for file " << fileName << endl;
+            return status;
+        }
+
+        // Allocate an empty page for the first data page.
+        status = bufMgr->allocPage(file, newPageNo, newPage);
+        if (status != OK)
+        {
+            cerr << "Error: Failed to allocate first data page for file " << fileName << endl;
+            return status;
+        }
+
+        // Initialize the first data page.
         newPage->init(newPageNo);
 
-        // Set header first/last pages to number of new page
+        // Store the page number of the first data page in the header page.
         hdrPage->firstPage = newPageNo;
-		hdrPage->lastPage = newPageNo;
+        hdrPage->lastPage = newPageNo;
 
-        // Unpin pages (?)
-        bufMgr->unPinPage(file, hdrPageNo, true);
-        bufMgr->unPinPage(file, newPageNo, true);
-
-        // Flush and close file
-        bufMgr->flushFile(file);
-        db.closeFile(file);
+        // Mark the first data page as dirty and unpin it.
+        status = bufMgr->unPinPage(file, newPageNo, true);
+        if (status != OK)
+        {
+            cerr << "Error: Failed to unpin first data page for file " << fileName << endl;
+            return status;
+        }
 
         return OK;
     }
-    return (FILEEXISTS);
+    return FILEEXISTS;
 }
+
 
 // routine to destroy a heapfile
 const Status destroyHeapFile(const string fileName)
