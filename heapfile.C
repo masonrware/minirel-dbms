@@ -286,12 +286,19 @@ const Status HeapFileScan::scanNext(RID& outRid)
     int 	nextPageNo;
     Record      rec;
 
+    // curPage == null
+        // no current page
+        // EOF
+        // uninitialized
+
+    // curRec should be on curPage
+        // curPage->getRecord(curRec, rec);
+
     // Do we start on first page of file?
         // check if curPage is null? or curRec?
             // if curPage is null do we set to first page?
             // or is it null when we reach the end of the file
 
-    // curRec
 	// matchRec - see if record matches scan filter (true / false)
         // convert RID to pointer to rec data first
 
@@ -301,10 +308,6 @@ const Status HeapFileScan::scanNext(RID& outRid)
 	
 	// set outRid to curRec if it matches search
     // return OK if no errors, otherwise first error that occurs
-	
-	
-	
-	
 	
 }
 
