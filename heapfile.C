@@ -487,6 +487,20 @@ const Status InsertFileScan::insertRecord(const Record & rec, RID& outRid)
         }
     }
 
+    // if the current page is not the lastPage
+    if(curPageNo != headerPage->lastPage) {
+        // unpin curpage
+        status = bufMgr->unPinPage(filePtr, curPageNo, true);
+
+        status = bufMgr->readPage(filePtr, headerPage->lastPage, curPage);
+        if (status != OK)
+        {
+            cerr << "Error: Failed to read current page " << headerPage->lastPage << " into buffer" << endl;
+            return status;
+        }
+    }
+
+    
     // Try to insert the record into the current page
     status = curPage->insertRecord(rec, rid);
     if (status == OK)
