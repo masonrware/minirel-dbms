@@ -549,7 +549,7 @@ const Status InsertFileScan::insertRecord(const Record & rec, RID& outRid)
         curDirtyFlag = true;
         outRid = rid;
 
-        cout << "552 -- header info" << endl;
+        cout << "137 -- header info" << endl;
         cout << "fileName: " << headerPage->fileName << endl;
         cout << "firstPage: " << headerPage->firstPage << endl;
         cout << "lastPage: " << headerPage->lastPage << endl;

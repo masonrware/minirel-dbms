@@ -112,7 +112,9 @@ const Status BufMgr::allocBuf(int & frame)
     // check for full buffer pool
     if (!found && numScanned >= 2*numBufs)
     {
+        cout << 115 << endl;
         return BUFFEREXCEEDED;
+        cout << 117 << endl;
     }
     
     // flush any existing changes to disk if necessary
@@ -122,7 +124,9 @@ const Status BufMgr::allocBuf(int & frame)
 
         status = bufTable[clockHand].file->writePage(bufTable[clockHand].pageNo,
                                                      &bufPool[clockHand]);
+        cout << 127 << endl;                                             
         if (status != OK) return status;
+        cout << 129 << endl;
     }
 
     // return new frame number
@@ -258,11 +262,15 @@ const Status BufMgr::allocPage(File* file, int& pageNo, Page*& page)
 
     // allocate a new page in the file
     Status status = file->allocatePage(pageNo);
+    cout << 261 << endl;
     if (status != OK)  return status; 
-
+    cout << 263 << endl;
+    
     // alloc a new frame
      status = allocBuf(frameNo);
+     cout << 267 << endl;
      if (status != OK) return status;
+     cout << 269 << endl;
 
      // set up the entry properly
      bufTable[frameNo].Set(file, pageNo);
@@ -270,7 +278,10 @@ const Status BufMgr::allocPage(File* file, int& pageNo, Page*& page)
 
      // insert in thehash table
      status = hashTable->insert(file, pageNo, frameNo);
+     cout << 277 << endl;
      if (status != OK) { return status; }
+     cout << 279 << endl;
+
      // cout << "allocated page " << pageNo <<  " to file " << file << "frame is: " << frameNo  << endl;
     return OK;
 }
