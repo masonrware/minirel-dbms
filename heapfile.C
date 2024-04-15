@@ -232,6 +232,7 @@ const Status HeapFile::getRecord(const RID & rid, Record & rec)
         curDirtyFlag = false; // Current page initially not dirty
     }
 
+    cout << 235 << endl;
     // Fetch the record from the current page
     status = curPage->getRecord(rid, rec);
 
@@ -527,12 +528,12 @@ const Status InsertFileScan::insertRecord(const Record & rec, RID& outRid)
         curPage->setNextPage(newPageNo);
         curDirtyFlag = true;
 
+        status = bufMgr->unPinPage(filePtr, curPageNo, true);
+        // TODO check status
+
         // Make the current page the newly allocated page
         curPage = newPage;
         curPageNo = newPageNo;
-
-        status = bufMgr->unPinPage(filePtr, curPageNo, true);
-        // TODO check status
 
         // Try to insert the record into the new page
         status = curPage->insertRecord(rec, rid);
