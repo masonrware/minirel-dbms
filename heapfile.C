@@ -495,6 +495,15 @@ const Status InsertFileScan::insertRecord(const Record & rec, RID& outRid)
         hdrDirtyFlag = true;
         curDirtyFlag = true;
         outRid = rid;
+
+        cout << "499 -- header info" << endl;
+        cout << "fileName: " << headerPage->fileName << endl;
+        cout << "firstPage: " << headerPage->firstPage << endl;
+        cout << "lastPage: " << headerPage->lastPage << endl;
+        cout << "pageCnt: " << headerPage->pageCnt << endl;
+        cout << "recCnt: " << headerPage->recCnt << endl;
+        cout << "headerPageNo: " << headerPageNo << endl;
+
         return OK;
     }
     else if (status == NOSPACE)
@@ -539,6 +548,15 @@ const Status InsertFileScan::insertRecord(const Record & rec, RID& outRid)
         hdrDirtyFlag = true;
         curDirtyFlag = true;
         outRid = rid;
+
+        cout << "552 -- header info" << endl;
+        cout << "fileName: " << headerPage->fileName << endl;
+        cout << "firstPage: " << headerPage->firstPage << endl;
+        cout << "lastPage: " << headerPage->lastPage << endl;
+        cout << "pageCnt: " << headerPage->pageCnt << endl;
+        cout << "recCnt: " << headerPage->recCnt << endl;
+        cout << "headerPageNo: " << headerPageNo << endl;
+
         return OK;
     }
     else
