@@ -130,7 +130,8 @@ HeapFile::HeapFile(const string & fileName, Status& returnStatus)
             returnStatus = status;
             return;
         }
-        hdrDirtyFlag = false; // Header page initially not dirty
+        // hdrDirtyFlag = false; // Header page initially not dirty
+        hdrDirtyFlag = true;
         headerPage = reinterpret_cast<FileHdrPage*>(hdrPage);
 
         cout << "137 -- header info" << endl;
@@ -154,7 +155,8 @@ HeapFile::HeapFile(const string & fileName, Status& returnStatus)
             returnStatus = status;
             return;
         }
-        curDirtyFlag = false; // Current page initially not dirty
+        // curDirtyFlag = false; // Current page initially not dirty
+        curDirtyFlag = true;
         curRec = NULLRID; // No current record initially
     }
     else
@@ -531,8 +533,7 @@ const Status InsertFileScan::insertRecord(const Record & rec, RID& outRid)
         curPageNo = newPageNo;
 
         // Try to insert the record into the new page
-        RID* ridptr = &rid;
-        status = curPage->insertRecord(rec, *ridptr);
+        status = curPage->insertRecord(rec, rid);
         if (status != OK)
         {
             cerr << "Error: Failed to insert record into new page" << endl;
@@ -545,7 +546,7 @@ const Status InsertFileScan::insertRecord(const Record & rec, RID& outRid)
         headerPage->lastPage = newPageNo;
         hdrDirtyFlag = true;
         curDirtyFlag = true;
-        outRid = *ridptr;
+        outRid = rid;
 
         cout << 549 << " " << outRid.slotNo << endl;
 
