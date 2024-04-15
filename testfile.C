@@ -372,9 +372,10 @@ int main(int argc, char **argv)
     {
         scan1->startScan(0, sizeof(int), INTEGER, (char*)&j, LT);
         i = 0;
-
+        
         while ((status = scan1->scanNext(rec2Rid)) != FILEEOF)
         {
+          
             status = scan1->getRecord(dbrec2);
             if (status != OK) break;
             memcpy(&rec2, dbrec2.data, dbrec2.length);
