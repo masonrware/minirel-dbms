@@ -242,6 +242,8 @@ const Status Page::getRecord(const RID & rid, Record & rec)
     int	slotNo = rid.slotNo;
     int offset;
 
+	cout << -slotNo << " " << slotCnt << " " << slot[-slotNo].length << endl;
+
     if (((-slotNo) > slotCnt) && (slot[-slotNo].length > 0))
     {
         offset = slot[-slotNo].offset; // extract offset in data[]
