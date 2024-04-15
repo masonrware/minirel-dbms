@@ -142,14 +142,14 @@ HeapFile::HeapFile(const string & fileName, Status& returnStatus)
         cout << "headerPageNo: " << headerPageNo << endl;
 
         // Get page number of first data page
-        if((status = hdrPage->getNextPage(curPageNo)) !=OK ){
-            cerr << "Error: Failed get the page number of the first data page of file " << fileName << endl;
-            returnStatus = status;
-            return;
-        }
+        // if((status = hdrPage->getNextPage(curPageNo)) !=OK ){
+        //     cerr << "Error: Failed get the page number of the first data page of file " << fileName << endl;
+        //     returnStatus = status;
+        //     return;
+        // }
 
         // Read and pin the first data page
-        if ((status = bufMgr->readPage(filePtr, curPageNo, curPage)) != OK) {
+        if ((status = bufMgr->readPage(filePtr, headerPage->firstPage, curPage)) != OK) {
             cerr << "Error: Failed to read and pin the first data page of file " << fileName << endl;
             returnStatus = status;
             return;
