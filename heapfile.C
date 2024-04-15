@@ -47,7 +47,7 @@ const Status createHeapFile(const string fileName)
         hdrPage->fileName[sizeof(hdrPage->fileName) - 1] = '\0'; // Ensure null termination
 
         // Mark the header page as dirty and unpin it.
-        status = bufMgr->unPinPage(file, hdrPageNo, true);
+        status = bufMgr->unPinPage(file, 0, true);
 
 
         cout << "header info" << endl;
