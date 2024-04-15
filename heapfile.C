@@ -40,7 +40,7 @@ const Status createHeapFile(const string fileName)
 
 
         cout << "header info" << endl;
-        cout << "fileName: " << hdrPage->fileName << endl;
+        cout << "fileName: " << pagePtr->fileName << endl;
         cout << "firstPage: " << hdrPage->firstPage << endl;
         cout << "lastPage: " << hdrPage->lastPage << endl;
         cout << "pageCnt: " << hdrPage->pageCnt << endl;
