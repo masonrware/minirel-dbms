@@ -46,8 +46,8 @@ const Status createHeapFile(const string fileName)
         strncpy(hdrPage->fileName, fileName.c_str(), sizeof(hdrPage->fileName) - 1);
         hdrPage->fileName[sizeof(hdrPage->fileName) - 1] = '\0'; // Ensure null termination
 
-        // // Mark the header page as dirty and unpin it.
-        // status = bufMgr->unPinPage(file, hdrPageNo, true);
+        // Mark the header page as dirty and unpin it.
+        status = bufMgr->unPinPage(file, hdrPageNo, true);
 
 
         cout << "53 -- header info" << endl;
@@ -477,7 +477,7 @@ const Status InsertFileScan::insertRecord(const Record & rec, RID& outRid)
     }
 
     // If the current page is NULL, make the last page the current page and read it into the buffer
-    if (curPage == nullptr)
+    if (curPage == NULL)
     {
         status = bufMgr->readPage(filePtr, headerPage->lastPage, curPage);
         if (status != OK)
@@ -496,6 +496,13 @@ const Status InsertFileScan::insertRecord(const Record & rec, RID& outRid)
         hdrDirtyFlag = true;
         curDirtyFlag = true;
         outRid = rid;
+
+        //TODO unpin page?
+        status = bufMgr->unPinPage(filePtr, curPageNo, true);
+        curPage = NULL;
+        curPageNo = 0;
+        if (status != OK) cerr << "error in unpin of data page\n";
+
         return OK;
     }
     else if (status == NOSPACE)
