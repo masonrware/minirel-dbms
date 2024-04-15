@@ -82,9 +82,10 @@ const Status createHeapFile(const string fileName)
     {
         // File doesn't exist. First create it and allocate an empty header page.
         status = db.createFile(fileName);
+        status = db.openFile(fileName, file);
         if (status != OK)
         {
-            cerr << "Error: Failed to create file " << fileName << endl;
+            cerr << "Error: Failed to create and open file " << fileName << endl;
             return status;
         }
 
