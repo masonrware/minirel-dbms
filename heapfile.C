@@ -229,7 +229,7 @@ const Status HeapFile::getRecord(const RID & rid, Record & rec)
             return status;
         }
         curPageNo = rid.pageNo; // Update current page number
-        curDirtyFlag = true; // Current page initially not dirty
+        curDirtyFlag = false; // Current page initially not dirty
     }
 
     // Fetch the record from the current page
