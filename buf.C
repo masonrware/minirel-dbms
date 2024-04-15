@@ -179,6 +179,7 @@ const Status BufMgr::unPinPage(File* file, const int PageNo,
     status = hashTable->lookup(file, PageNo, frameNo);
     cout << 180 << endl;
     if (status != OK) return status;
+    cout << 182 << endl;
     /*
     if (status != OK) {cout << "lookup failed in unpinpage\n"; return status;}
     cout << "unpinning (file.page) " << file << "." << PageNo << " with dirty flag = " << dirty << endl;
