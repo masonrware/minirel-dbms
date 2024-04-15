@@ -241,9 +241,7 @@ Status File::allocatePage(int& pageNo)
   Status status;
 
   if ((status = intread(0, &header)) != OK)
-  cout << 244 << endl;
     return status;
-    cout << 246 << endl;
 
   // If free list has pages on it, take one from there
   // and adjust free list accordingly.
@@ -256,9 +254,7 @@ Status File::allocatePage(int& pageNo)
     pageNo = DBP(header).nextFree;
     Page firstFree;
     if ((status = intread(pageNo, &firstFree)) != OK)
-    cout << 259 << endl;
       return status;
-      cout << 261 << endl;
 
     DBP(header).nextFree = DBP(firstFree).nextFree;
 

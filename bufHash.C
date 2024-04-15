@@ -56,17 +56,13 @@ Status BufHashTbl::insert(const File* file, const int pageNo, const int frameNo)
   hashBucket* tmpBuc = ht[index];
   while (tmpBuc) {
     if (tmpBuc->file == file && tmpBuc->pageNo == pageNo)
-    cout << 59 << endl;
       return HASHTBLERROR;
-      cout << 61 << endl;
     tmpBuc = tmpBuc->next;
   }
 
   tmpBuc = new hashBucket;
   if (!tmpBuc)
-  cout << 67 << endl;
     return HASHTBLERROR;
-    cout << 69 << endl;
   tmpBuc->file = (File*) file;
   tmpBuc->pageNo = pageNo;
   tmpBuc->frameNo = frameNo;
