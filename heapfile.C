@@ -213,7 +213,7 @@ const int HeapFile::getRecCnt() const
 
 const Status HeapFile::getRecord(const RID & rid, Record & rec)
 {
-    cout<< "getRecord. record (" << rid.pageNo << "." << rid.slotNo << ")" << endl;
+    // cout<< "getRecord. record (" << rid.pageNo << "." << rid.slotNo << ")" << endl;
    
     Status status;
 
