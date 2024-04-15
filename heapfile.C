@@ -47,7 +47,7 @@ const Status createHeapFile(const string fileName)
         hdrPage->fileName[sizeof(hdrPage->fileName) - 1] = '\0'; // Ensure null termination
 
         // Mark the header page as dirty and unpin it.
-        status = bufMgr->unPinPage(file, hdrPageNo, true);
+        // status = bufMgr->unPinPage(file, hdrPageNo, true);
 
 
         cout << "53 -- header info" << endl;
@@ -498,10 +498,10 @@ const Status InsertFileScan::insertRecord(const Record & rec, RID& outRid)
         outRid = rid;
 
         //TODO unpin page?
-        status = bufMgr->unPinPage(filePtr, curPageNo, true);
-        curPage = NULL;
-        // curPageNo = 0;
-        if (status != OK) cerr << "error in unpin of data page\n";
+        // status = bufMgr->unPinPage(filePtr, curPageNo, true);
+        // curPage = NULL;
+        // // curPageNo = 0;
+        // if (status != OK) cerr << "error in unpin of data page\n";
 
         return OK;
     }
@@ -530,6 +530,9 @@ const Status InsertFileScan::insertRecord(const Record & rec, RID& outRid)
         // Make the current page the newly allocated page
         curPage = newPage;
         curPageNo = newPageNo;
+
+        status = bufMgr->unPinPage(filePtr, curPageNo, true);
+        // TODO check status
 
         // Try to insert the record into the new page
         status = curPage->insertRecord(rec, rid);
