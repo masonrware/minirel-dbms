@@ -38,16 +38,16 @@ const Status createHeapFile(const string fileName)
         // Initialize the header page values.
         strncpy(hdrPage->fileName, fileName.c_str(), MAXNAMESIZE - 1);
         hdrPage->fileName[MAXNAMESIZE - 1] = '\0'; // Ensure null termination
-        hdrPage->firstPage = -1; // Initialize to an invalid page number
-        hdrPage->lastPage = -1;  // Initialize to an invalid page number
+        hdrPage->firstPage = hdrPageNo; // Initialize to an invalid page number
+        hdrPage->lastPage = hdrPageNo;  // Initialize to an invalid page number
         hdrPage->pageCnt = 0; // Initially, there are no pages
         hdrPage->recCnt = 0;  // Initially, there are no records
         // Set the fileName field of the header page.
         strncpy(hdrPage->fileName, fileName.c_str(), sizeof(hdrPage->fileName) - 1);
         hdrPage->fileName[sizeof(hdrPage->fileName) - 1] = '\0'; // Ensure null termination
 
-        // Mark the header page as dirty and unpin it.
-        status = bufMgr->unPinPage(file, 0, true);
+        // // Mark the header page as dirty and unpin it.
+        // status = bufMgr->unPinPage(file, hdrPageNo, true);
 
 
         cout << "53 -- header info" << endl;
