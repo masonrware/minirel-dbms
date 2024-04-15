@@ -131,7 +131,8 @@ HeapFile::HeapFile(const string & fileName, Status& returnStatus)
             return;
         }
         hdrDirtyFlag = false; // Header page initially not dirty
-        headerPage = reinterpret_cast<FileHdrPage*>(hdrPage);
+        // headerPage = reinterpret_cast<FileHdrPage*>(hdrPage);
+        headerPage = (FileHdrPage *) hdrPage;
 
         cout << "header info" << endl;
         cout << "fileName: " << headerPage->fileName << endl;
