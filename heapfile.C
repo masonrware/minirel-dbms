@@ -497,7 +497,7 @@ const Status InsertFileScan::insertRecord(const Record & rec, RID& outRid)
         curDirtyFlag = true;
         outRid = rid;
 
-        cout << rid.slotNo << endl;
+        cout << 500 << " " <<rid.slotNo << endl;
 
         return OK;
     }
@@ -545,6 +545,9 @@ const Status InsertFileScan::insertRecord(const Record & rec, RID& outRid)
         hdrDirtyFlag = true;
         curDirtyFlag = true;
         outRid = rid;
+
+        cout << 549 << " " << rid.slotNo << endl;
+
         return OK;
     }
     else
