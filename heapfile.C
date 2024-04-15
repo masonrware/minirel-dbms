@@ -37,7 +37,15 @@ const Status createHeapFile(const string fileName)
         hdrPage->lastPage = pagePtr->lastPage;
 		hdrPage->pageCnt = pagePtr->pageCnt;
 		hdrPage->recCnt = pagePtr->recCnt;
-		
+
+
+        cout << "header info" << endl;
+        cout << "fileName: " << hdrPage->fileName << endl;
+        cout << "firstPage: " << hdrPage->firstPage << endl;
+        cout << "lastPage: " << hdrPage->lastPage << endl;
+        cout << "pageCnt: " << hdrPage->pageCnt << endl;
+        cout << "recCnt: " << hdrPage->recCnt << endl;
+
         // Allocate first data page
 		status = bufMgr->allocPage(file, newPageNo, newPage);
         newPage->init(newPageNo);
