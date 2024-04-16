@@ -255,6 +255,7 @@ const Status Page::getRecord(const RID & rid, Record & rec)
     }
 
     else {
+		cout << 258 << endl;
 		return INVALIDSLOTNO;
 	}
 }
