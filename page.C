@@ -184,8 +184,10 @@ const Status Page::deleteRecord(const RID & rid)
 	      return OK;
 	}
     }
-	cout << ">>>> " << slotNo << endl;
-    else return INVALIDSLOTNO;
+    else{
+		cout << ">>>> " << slotNo << endl;
+		return INVALIDSLOTNO;
+	} 
 }
 
 // returns RID of first record on page
