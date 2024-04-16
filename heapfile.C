@@ -339,7 +339,7 @@ const Status HeapFileScan::scanNext(RID &outRid)
     Record rec;
 
     // make sure currentpage is valid (curPageNo is not -1)
-    if (curRec.pageNo < 0 || curRec.slotNo < 0)
+    if (curPageNo < 0)
     {
         return FILEEOF; // no more records in the file stop iterating
     }
