@@ -184,7 +184,7 @@ const Status Page::deleteRecord(const RID & rid)
 	      return OK;
 	}
     }
-	cout << ">>>> " << slotNot << endl;
+	cout << ">>>> " << slotNo << endl;
     else return INVALIDSLOTNO;
 }
 
