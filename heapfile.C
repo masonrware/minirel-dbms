@@ -333,67 +333,7 @@ const Status HeapFileScan::scanNext(RID &outRid) {
     RID nextRid;
     Record rec;
     int nextPageNo;
-
-//     // Check if the current page is NULL
-//     if (curPage == nullptr) {
-//         // If curPage is NULL, get the first page in the file
-//         status = bufMgr->readPage(filePtr, headerPage->firstPage, curPage);
-//         curPageNo = headerPage->firstPage;
-//         curDirtyFlag = false;
-//         if (status != OK) {
-//             cerr << "Error: Failed to get the first page in the file" << endl;
-//             return status;
-//         }
-//     }
-
-//     // Loop through each page in the file
-//     while (curPageNo != -1) {
-//         // Get the next record on the current page
-//         status = curPage->nextRecord(curRec, nextRid);
-
-//         if (status == OK) {
-//             // Check if the current record matches the scan predicate
-//             if (matchRec(rec)) {
-//                 // If the record matches, store its RID in outRid and return
-//                 outRid = nextRid;
-//                 return OK;
-//             }
-//         } else if (status == ENDOFPAGE) {
-//             // If we've reached the end of the current page, move to the next page
-//             status = curPage->getNextPage(nextPageNo);
-//             if (status != OK) {
-//                 cout << "error on 365" << endl;
-//                 return status;
-//             }
-//             status = bufMgr->unPinPage(filePtr, curPageNo, curDirtyFlag);
-//             if (status != OK) {
-//                 cout << "error on 370" << endl;
-//                 return status;
-//             }
-
-//             if (nextPageNo != -1) {
-//                 status = bufMgr->readPage(filePtr, nextPageNo, curPage);
-//                 if (status != OK) {
-//                     cerr << "Error: Failed to read the next page in the file" << endl;
-//                     return status;
-//                 }
-//                 curPageNo = nextPageNo;
-//                 curDirtyFlag = false;
-//                 // Reset the current record pointer to the beginning of the page
-//                 curRec = NULLRID;
-//             } else {
-//                 // If there are no more pages in the file, return ENDOFFILE
-//                 return FILEEOF;
-//             }
-//         } else {
-//             // If an error occurred while reading the current page, return the error status
-//             cerr << "Error: Failed to read the current page in the file" << endl;
-//             return status;
-//         }
-//     }
-
-//     return OK;
-// }
+    
     if (curPageNo < 0) {
         return FILEEOF;
     }
