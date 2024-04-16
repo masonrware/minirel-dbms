@@ -428,7 +428,7 @@ const Status HeapFileScan::scanNext(RID &outRid) {
                 curDirtyFlag = false;
 
                 status = curPage->firstRecord(curRec);
-                if (status != OK && status != NOMORERECS) {
+                if (status != OK && status != NORECORDS) {
                     return status;
                 }
                 cout << 433 << endl;
