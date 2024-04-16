@@ -186,7 +186,7 @@ const Status Page::deleteRecord(const RID & rid)
 	}
     }
     else{
-		cout << ">>>> " << slotNo << endl;
+		cout << ">>>> " << slotNo << " " << rid.pageNo << endl;
 		return INVALIDSLOTNO;
 	} 
 }
@@ -246,8 +246,6 @@ const Status Page::getRecord(const RID & rid, Record & rec)
     int	slotNo = rid.slotNo;
     int offset;
 
-	cout << "249:: " << sizeof(slot) << endl;
-
     if (((-slotNo) > slotCnt) && (slot[-slotNo].length > 0))
     {
         offset = slot[-slotNo].offset; // extract offset in data[]
@@ -257,7 +255,6 @@ const Status Page::getRecord(const RID & rid, Record & rec)
     }
 
     else {
-		cout << "259" << endl;
 		return INVALIDSLOTNO;
 	}
 }
