@@ -433,6 +433,8 @@ const Status HeapFileScan::scanNext(RID &outRid) {
                 }
                 cout << 433 << endl;
             // }
+            
+            curRec.slotNo += 1;
 
             status = curPage->getRecord(curRec, rec);
             if (status != OK) {
