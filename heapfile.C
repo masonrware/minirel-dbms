@@ -349,6 +349,7 @@ const Status HeapFileScan::scanNext(RID &outRid)
     {
         // get first page
         curPageNo = headerPage->firstPage;
+        cout << "HEADER FIRST PAGE: " << curPageNo << endl;
         if (headerPage->firstPage == -1) // meaning its -1 as stated in createHeapFile
         {
             return FILEEOF; // no more records in the file stop iterating
