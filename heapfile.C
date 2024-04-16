@@ -339,7 +339,7 @@ const Status HeapFileScan::scanNext(RID &outRid)
     Record rec;
 
     // make sure currentpage is valid (curPageNo is not -1)
-    if (curPageNo < 0)
+    if (curRec.pageNo < 0 || curRec.slotNo < 0)
     {
         return FILEEOF; // no more records in the file stop iterating
     }
@@ -349,7 +349,7 @@ const Status HeapFileScan::scanNext(RID &outRid)
     {
         // get first page
         curPageNo = headerPage->firstPage;
-        cout << "HEADER FIRST PAGE: " << curPageNo << endl;
+        // cout << "HEADER FIRST PAGE: " << curPageNo << endl;
         if (headerPage->firstPage == -1) // meaning its -1 as stated in createHeapFile
         {
             return FILEEOF; // no more records in the file stop iterating
@@ -511,8 +511,8 @@ const Status HeapFileScan::deleteRecord()
     Status status;
 
     // delete the "current" record from the page
-    cout << "CURREC PG: " << curRec.pageNo << endl;
-    cout << "CURREC SLOT: " << curRec.slotNo << endl;
+    // cout << "CURREC PG: " << curRec.pageNo << endl;
+    // cout << "CURREC SLOT: " << curRec.slotNo << endl;
     status = curPage->deleteRecord(curRec);
     curDirtyFlag = true;
 
