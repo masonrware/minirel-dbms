@@ -3,7 +3,6 @@ Testing the relation interface
 
 <><><><><><>
 TEST  1
-db.destroy. unlink returned error
 53 -- header info
 fileName: dummy.02
 firstPage: 1
@@ -124,803 +123,1575 @@ lastPage: 780
 pageCnt: 778
 recCnt: 1
 headerPageNo: 1
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
-err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
+>>>> 0
+336err0r status return from deleteRecord
 invoking heapfile destructor on file dummy.02
 scan saw 5838 records 
 Err0r.   scan should have returned 5060 records!
 
 <><><><><><>
 TEST  9
-53 -- header info
-fileName: dummy.03
-firstPage: 1
-lastPage: 1
-pageCnt: 0
-recCnt: 0
 opening file dummy.03
 137 -- header info
 fileName: dummy.03
 firstPage: 2
-lastPage: 2
-pageCnt: 0
-recCnt: 0
+lastPage: 2752
+pageCnt: 2750
+recCnt: 60720
 headerPageNo: 1
 
 <><><><><><>
@@ -939,11 +1710,12 @@ opening file dummy.03
 137 -- header info
 fileName: dummy.03
 firstPage: 2
-lastPage: 462
-pageCnt: 460
-recCnt: 10120
+lastPage: 3210
+pageCnt: 3208
+recCnt: 70840
 headerPageNo: 1
-scan of dummy.03 saw 5060 records 
+scan of dummy.03 saw 5081 records 
+Err0r.   scan should have returned 5060 records!
 invoking heapfile destructor on file dummy.03
 
 <><><><><><>
@@ -954,19 +1726,21 @@ opening file dummy.03
 137 -- header info
 fileName: dummy.03
 firstPage: 2
-lastPage: 462
-pageCnt: 460
-recCnt: 10120
+lastPage: 3210
+pageCnt: 3208
+recCnt: 70840
 headerPageNo: 1
 opening file dummy.03
 137 -- header info
 fileName: dummy.03
 firstPage: 2
-lastPage: 462
-pageCnt: 460
-recCnt: 10120
+lastPage: 3210
+pageCnt: 3208
+recCnt: 70840
 headerPageNo: 1
-scan file1 saw 15180 records 
+scan file1 saw 15201 records 
+Err0r.   scan should have returned 15180 records!
+Err0r.   scan past end of file did not return FILEEOF!
 invoking heapfile destructor on file dummy.03
 invoking heapfile destructor on file dummy.03
 
@@ -975,12 +1749,6 @@ TEST  13
 
 Destroy dummy.03
 got err0r status return from destroy file
-53 -- header info
-fileName: dummy.04
-firstPage: 1
-lastPage: 1
-pageCnt: 0
-recCnt: 0
 
 <><><><><><>
 TEST  14
@@ -988,9 +1756,9 @@ opening file dummy.04
 137 -- header info
 fileName: dummy.04
 firstPage: 2
-lastPage: 2
-pageCnt: 0
-recCnt: 0
+lastPage: 4675
+pageCnt: 4673
+recCnt: 54720
 headerPageNo: 1
 inserting 10120 records into dummy1
 invoking heapfile destructor on file dummy.04
@@ -1003,12 +1771,13 @@ opening file dummy.04
 137 -- header info
 fileName: dummy.04
 firstPage: 2
-lastPage: 780
-pageCnt: 778
-recCnt: 10120
+lastPage: 5454
+pageCnt: 5452
+recCnt: 64840
 headerPageNo: 1
-scan file1 saw 10120 records 
-i: 10120
+scan file1 saw 10133 records 
+Err0r. scan should have returned 10120 records!!
+i: 10133
 number of records deleted by scan 1000
 
 invoking heapfile destructor on file dummy.04
@@ -1019,12 +1788,12 @@ opening file dummy.04
 137 -- header info
 fileName: dummy.04
 firstPage: 2
-lastPage: 780
-pageCnt: 778
-recCnt: 9120
+lastPage: 5454
+pageCnt: 5452
+recCnt: 63840
 headerPageNo: 1
 should have seen 1000 fewer records after deletions
-saw 9196records
+saw 9209records
 invoking heapfile destructor on file dummy.04
 
 <><><><><><>
@@ -1033,9 +1802,9 @@ opening file dummy.04
 137 -- header info
 fileName: dummy.04
 firstPage: 2
-lastPage: 780
-pageCnt: 778
-recCnt: 9120
+lastPage: 5454
+pageCnt: 5452
+recCnt: 63840
 headerPageNo: 1
 
 Filtered scan matching i field GTE than 7590
@@ -1049,9 +1818,9 @@ opening file dummy.04
 137 -- header info
 fileName: dummy.04
 firstPage: 2
-lastPage: 780
-pageCnt: 778
-recCnt: 9120
+lastPage: 5454
+pageCnt: 5452
+recCnt: 63840
 headerPageNo: 1
 
 Filtered scan matching f field GT than 9108
@@ -1065,18 +1834,18 @@ opening file dummy.04
 137 -- header info
 fileName: dummy.04
 firstPage: 2
-lastPage: 780
-pageCnt: 778
-recCnt: 9120
+lastPage: 5454
+pageCnt: 5452
+recCnt: 63840
 headerPageNo: 1
 invoking heapfile destructor on file dummy.04
 opening file dummy.04
 137 -- header info
 fileName: dummy.04
 firstPage: 2
-lastPage: 780
-pageCnt: 778
-recCnt: 9120
+lastPage: 5454
+pageCnt: 5452
+recCnt: 63840
 headerPageNo: 1
 
 passed BADSCANPARAM test
@@ -1087,9 +1856,9 @@ opening file dummy.04
 137 -- header info
 fileName: dummy.04
 firstPage: 2
-lastPage: 780
-pageCnt: 778
-recCnt: 9120
+lastPage: 5454
+pageCnt: 5452
+recCnt: 63840
 headerPageNo: 1
 
 passed large record insert test
