@@ -622,7 +622,8 @@ const Status InsertFileScan::insertRecord(const Record &rec, RID &outRid)
     }
 
     // set new page as current page
-    curPage = targetPage;
+    operationStatus = bufMgr->readPage(filePtr, targetPageNo, curPage);
+    // curPage = targetPage;
     curPageNo = targetPageNo;
 
     // try to insert the record into new page
