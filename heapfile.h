@@ -92,8 +92,6 @@ public:
     // marks current page of scan dirty
     const Status markDirty();
 
-    Status handlePageEnd();
-
 private:
     int   offset;            // byte offset of filter attribute
     int   length;            // length of filter attribute
