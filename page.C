@@ -255,5 +255,7 @@ const Status Page::getRecord(const RID & rid, Record & rec)
         rec.length = slot[-slotNo].length; // return length of record
 		return OK;
     }
+
+	cout << "259" << endl;
     else return INVALIDSLOTNO;
 }
