@@ -339,16 +339,15 @@ const Status HeapFileScan::scanNext(RID &outRid) {
     }
 
     if (curPage == NULL) {
-        // If first pageNo is -1, file is empty
-        if (headerPage->firstPage == -1) {
+        // If first pageNo is the headerPageNo, file is empty
+        if (headerPage->firstPage == headerPageNo) {
             return FILEEOF;
         }
 
-        // Read in first page of file
+        // Read in and pin the first page of file
         curPageNo = headerPage->firstPage;
 
         status = bufMgr->readPage(filePtr, curPageNo, curPage);
-        // curDirtyFlag = false;
         curRec = NULLRID;
 
         if (status != OK) {

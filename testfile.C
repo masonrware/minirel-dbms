@@ -308,7 +308,7 @@ int main(int argc, char **argv)
                 status = scan1->deleteRecord();
                 if ((status != OK) && ( status != NORECORDS))
                 {
-                    cout << "err0r status return from deleteRecord" << endl;
+                    cout << 311 << "err0r status return from deleteRecord" << endl;
                     error.print(status);
                 }
                 deleted++;
@@ -333,7 +333,7 @@ int main(int argc, char **argv)
             status = scan1->deleteRecord();
             if ((status != OK) && ( status != NORECORDS))
             {
-                cout << "err0r status return from deleteRecord" << endl;
+                cout << 336 << "err0r status return from deleteRecord" << endl;
                 error.print(status);
             }
             i++;
