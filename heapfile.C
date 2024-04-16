@@ -329,173 +329,99 @@ const Status HeapFileScan::resetScan()
 }
 
 
-const Status HeapFileScan::scanNext(RID &outRid)
-{
-
+const Status HeapFileScan::scanNext(RID &outRid) {
     Status status = OK;
     RID nextRid;
-    RID tmpRid;
-    int nextPageNo;
     Record rec;
+    int nextPageNo;
 
-    // make sure currentpage is valid (curPageNo is not -1)
-    if (curPageNo < 0)
-    {
-        return FILEEOF; // no more records in the file stop iterating
+    if (curPageNo < 0) {
+        return FILEEOF;
     }
 
-    // If current page is invalid, start from the first page
-    if (curPage == NULL)
-    {
-        // get first page
+    if (curPage == NULL) {
         curPageNo = headerPage->firstPage;
-        // cout << "HEADER FIRST PAGE: " << curPageNo << endl;
-        if (headerPage->firstPage == -1) // meaning its -1 as stated in createHeapFile
-        {
-            return FILEEOF; // no more records in the file stop iterating
+        if (curPageNo == -1) {
+            return FILEEOF;
         }
 
         status = bufMgr->readPage(filePtr, curPageNo, curPage);
+        if (status != OK) {
+            return status;
+        }
 
-        // bookkeeping...
         curDirtyFlag = false;
         curRec = NULLRID;
 
-        // make sure that the above call succeeded before proceeding
-        if (status != OK)
-        {
+        status = curPage->firstRecord(curRec);
+        if (status == NOMORERECS) {
+            return handlePageEnd();
+        }
+
+        status = curPage->getRecord(curRec, rec);
+        if (status != OK) {
             return status;
         }
 
-        // Get the first record of the page and store it in curRec using tmpRid
-        status = curPage->firstRecord(tmpRid);
-        curRec = tmpRid;
-
-        if (status == NOMORERECS) // meaning there are no records in the file
-        {
-            // need to unpin the page
-            status = bufMgr->unPinPage(filePtr, curPageNo, curDirtyFlag);
-            if (status != OK)
-            {
-                return status;
-            }
-
-            // heap file bookkeeping...
-            curPageNo = -1; // is invalid now dont iterate anymore
-            curPage = NULL; // done scanning
-            return FILEEOF; // no more records in the file we done
-        }
-
-        // if it passed here, that means there is a record we can check for
-        status = curPage->getRecord(tmpRid, rec);
-        if (status != OK)
-        {
-            return status;
-        }
-
-        // Check if the record matches the scan predicate
-        if (matchRec(rec))
-        {
-            outRid = tmpRid;
-            return OK; // yey we did it!
+        if (matchRec(rec)) {
+            outRid = curRec;
+            return OK;
         }
     }
 
-    while (true) // inf loop until we find a record that matches the predicate
-    {
-        // get next record
+    while (true) {
         status = curPage->nextRecord(curRec, nextRid);
-        if (status == OK)
-        {
-            // Check if the record matches the scan predicate
+        if (status == OK) {
             curRec = nextRid;
-
-            // need to actually get the record to check if it matches the predicate
             status = curPage->getRecord(curRec, rec);
-            if (status != OK)
-            {
+            if (status != OK) {
                 return status;
             }
 
-            if (matchRec(rec))
-            {
+            if (matchRec(rec)) {
                 outRid = curRec;
                 return OK;
             }
-        }
-        else
-        {
-            while (status == NORECORDS || status == ENDOFPAGE) // get next page loop
-            {
-                // Note: if we are in the end of a page, or there are no records on the page, we need to get the next page either way
-
-                // get the next page stored in the current page
-               
+        } else {
+            while (status == NORECORDS || status == ENDOFPAGE) {
                 status = curPage->getNextPage(nextPageNo);
-                 
-                if (nextPageNo == -1) // as stated in createHeapFile
-                {
-                    // no more pages in the file return EOF last page
+                if (nextPageNo == -1) {
                     return FILEEOF;
                 }
 
-                // if we passed here, that means there is a next page...
-
-                // no more records on the current page, so unpin it and reset heap file bookkeeping...
-                status = bufMgr->unPinPage(filePtr, curPageNo, curDirtyFlag);
-                curPageNo = -1; // is invalid now
-                curPage = NULL; // done scanning this page
-
-                curRec = NULLRID;
-
-                // make sure that the above call succeeded before proceeding
-                if (status != OK)
-                {
-                    return status;
-                }
-
-                // bookkeeping...
-                curDirtyFlag = false;
-
-                // read the next page into curPage
-                curPageNo = nextPageNo; // read in the next page
-          
-                status = bufMgr->readPage(filePtr, curPageNo, curPage);
-                if (status != OK)
-                {
-                    // curRec
-                    return status;
-                }
-
-                // Get the first record of the page
-                status = curPage->firstRecord(curRec);
-
-                if (status != OK && status != NOMORERECS) // handle error or no records case
-                {
+                status = handlePageEnd();
+                if (status != OK) {
                     return status;
                 }
             }
 
-            // actually get the record
             status = curPage->getRecord(curRec, rec);
-            if (status != OK)
-            {
-                
+            if (status != OK) {
                 return status;
             }
 
-            // Check if the record matches the scan filter
-            if (matchRec(rec))
-            {
+            if (matchRec(rec)) {
                 outRid = curRec;
                 return OK;
             }
-
-            // if we passed here, that means we need to get the next record
         }
     }
     return OK;
 }
+
+Status HeapFileScan::handlePageEnd() {
+    Status status = bufMgr->unPinPage(filePtr, curPageNo, curDirtyFlag);
+    curPageNo = -1;
+    curPage = NULL;
+
+    if (status != OK) {
+        return status;
+    }
+
+    return FILEEOF;
+}
+
+
 
 // returns pointer to the current record.  page is left pinned
 // and the scan logic is required to unpin the page 
