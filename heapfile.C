@@ -380,6 +380,7 @@ const Status HeapFileScan::scanNext(RID &outRid) {
     }
 
     while (true) {
+        curRec.slotNo += 1;
         // get next record
         status = curPage->nextRecord(curRec, nextRid);
         // if it exists on this page
