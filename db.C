@@ -255,6 +255,7 @@ Status File::allocatePage(int& pageNo)
     Page firstFree;
     if ((status = intread(pageNo, &firstFree)) != OK)
       return status;
+
     DBP(header).nextFree = DBP(firstFree).nextFree;
 
   } else {                              // no free list, have to extend file
