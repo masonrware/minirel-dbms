@@ -97,9 +97,8 @@ const Status Page::insertRecord(const Record & rec, RID& rid)
 
 	tmpRid.pageNo = curPage;
 	tmpRid.slotNo = -i; // make a positive slot number
+	// cout << "100 ~!!! " << tmpRid.slotNo << endl;
 	rid = tmpRid;
-
-	cout << 102 << " " << slotCnt << endl;
 
 	return OK;
     }
@@ -186,7 +185,10 @@ const Status Page::deleteRecord(const RID & rid)
 	      return OK;
 	}
     }
-    else return INVALIDSLOTNO;
+    else{
+		cout << ">>>> " << slotNo << endl;
+		return INVALIDSLOTNO;
+	} 
 }
 
 // returns RID of first record on page
@@ -246,7 +248,6 @@ const Status Page::getRecord(const RID & rid, Record & rec)
 	
     int	slotNo = rid.slotNo;
     int offset;
-	cout << -slotNo << " " << slotCnt << " " << slot[-slotNo].length << endl;
 	
     if (((-slotNo) > slotCnt) && (slot[-slotNo].length > 0))
     {
