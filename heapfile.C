@@ -109,7 +109,6 @@ const Status destroyHeapFile(const string fileName)
 HeapFile::HeapFile(const string & fileName, Status& returnStatus)
 {
     Status 	status;
-    Page*	pagePtr;
 
     cout << "opening file " << fileName << endl;
 
@@ -534,7 +533,7 @@ const Status InsertFileScan::insertRecord(const Record &rec, RID &outRid)
 {
     Page *targetPage;
     int targetPageNo;
-    Status operationStatus, unpinStatus;
+    Status operationStatus;
     RID generatedRID;
 
     // check for very large records
