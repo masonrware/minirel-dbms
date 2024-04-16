@@ -446,6 +446,8 @@ const Status HeapFileScan::scanNext(RID &outRid)
                 curPageNo = -1; // is invalid now
                 curPage = NULL; // done scanning this page
 
+                curRec = NULLRID;
+
                 // make sure that the above call succeeded before proceeding
                 if (status != OK)
                 {
