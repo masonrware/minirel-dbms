@@ -636,6 +636,8 @@ const Status InsertFileScan::insertRecord(const Record &rec, RID &outRid)
         curDirtyFlag = true;
         outRid = generatedRID;
 
+        unpinStatus = bufMgr->unPinPage(filePtr, curPageNo, true); // unpin failed page
+
         return OK; //poggies
     }
 
