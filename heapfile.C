@@ -88,6 +88,10 @@ const Status createHeapFile(const string fileName)
             cerr << "Error: Failed to unpin first data page for file " << fileName << endl;
             return status;
         }
+        bufMgr->flushFile(file);
+        db.closeFile(file);
+        
+
 
         return OK;
     }
