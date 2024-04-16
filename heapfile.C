@@ -338,11 +338,13 @@ const Status HeapFileScan::scanNext(RID &outRid) {
         return FILEEOF;
     }
 
+    cout << 341 << endl;
     if (curPage == NULL) {
         // If first pageNo is the headerPageNo, file is empty
         if (headerPage->firstPage == headerPageNo) {
             return FILEEOF;
         }
+        cout << 347 << endl;
 
         // Read in and pin the first page of file
         status = bufMgr->readPage(filePtr, headerPage->firstPage, curPage);
@@ -352,6 +354,7 @@ const Status HeapFileScan::scanNext(RID &outRid) {
         if (status != OK) {
             return status;
         }
+        cout << 357 << endl;
 
         status = curPage->firstRecord(curRec);
 
@@ -361,16 +364,19 @@ const Status HeapFileScan::scanNext(RID &outRid) {
             curPage = NULL;
             return FILEEOF;
         }
+        cout << 367 << endl;
 
         status = curPage->getRecord(curRec, rec);
         if (status != OK) {
             return status;
         }
+        cout << 373 << endl;
 
         if (matchRec(rec)) {
             outRid = curRec;
             return OK;
         }
+        cout << 379 << endl;
     }
 
     while (true) {
@@ -381,18 +387,20 @@ const Status HeapFileScan::scanNext(RID &outRid) {
             // TODO
             // !! is this how we update curRec????
             // TODO
-            // curRec = nextRid;
-            curRec.pageNo = nextRid.pageNo;
-            curRec.slotNo = nextRid.slotNo;
+            curRec = nextRid;
+
+
             status = curPage->getRecord(curRec, rec);
             if (status != OK) {
                 return status;
             }
+            cout << 397 << endl;
 
             if (matchRec(rec)) {
                 outRid = curRec;
                 return OK;
             }
+            cout << 403 << endl;
         } // we have to jump to the next page 
         else {
             // while (status == NORECORDS || status == ENDOFPAGE) {
@@ -401,17 +409,21 @@ const Status HeapFileScan::scanNext(RID &outRid) {
                     return FILEEOF;
                 }
 
+                cout << 412 << endl;
+
                 // unpin the current page
                 status = bufMgr->unPinPage(filePtr, curPageNo, curDirtyFlag);
                 if (status != OK) {
                     return status;
                 }
+                cout << 419 << endl;
 
                 // update the current page to the next page
                 status = bufMgr->readPage(filePtr, nextPageNo, curPage);
                 if (status != OK) {
                     return status;
                 }
+                cout << 426 << endl;
                 curPageNo = nextPageNo;
                 curDirtyFlag = false;
 
@@ -419,17 +431,20 @@ const Status HeapFileScan::scanNext(RID &outRid) {
                 if (status != OK && status != NOMORERECS) {
                     return status;
                 }
+                cout << 433 << endl;
             // }
 
             status = curPage->getRecord(curRec, rec);
             if (status != OK) {
                 return status;
             }
+            cout << 440 << endl;
 
             if (matchRec(rec)) {
                 outRid = curRec;
                 return OK;
             }
+            cout << 447 << endl;
         }
     }
     return OK;
