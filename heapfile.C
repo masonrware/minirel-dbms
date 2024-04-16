@@ -364,6 +364,7 @@ const Status HeapFileScan::scanNext(RID &outRid) {
             return FILEEOF;
         }
 
+        // Returns INVALIDSLOTNO or OK
         status = curPage->getRecord(curRec, rec);
         if (status != OK) {
             return status;
@@ -448,8 +449,8 @@ const Status HeapFileScan::deleteRecord()
     Status status;
 
     // delete the "current" record from the page
-    // cout << "CURREC PG: " << curRec.pageNo << endl;
-    // cout << "CURREC SLOT: " << curRec.slotNo << endl;
+    cout << "CURREC PG: " << curRec.pageNo << endl;
+    cout << "CURREC SLOT: " << curRec.slotNo << endl;
     status = curPage->deleteRecord(curRec);
     curDirtyFlag = true;
 

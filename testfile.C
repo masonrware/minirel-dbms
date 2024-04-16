@@ -578,7 +578,6 @@ int main(int argc, char **argv)
 	if (i != num)
             cout << "Err0r. scan should have returned " << (int) num 
 		<< " records!!" << endl;
-        cout << "i: " << i << endl;
         cout << "number of records deleted by scan " << numDeletes << endl;
 	if (numDeletes != 1000)
 	    cout << "Err0r. Should have deleted 1000 records!!!" << endl;
