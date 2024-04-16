@@ -339,10 +339,13 @@ const Status HeapFileScan::scanNext(RID &outRid) {
     }
 
     if (curPage == NULL) {
-        curPageNo = headerPage->firstPage;
+        // If first pageNo is -1, file is empty
         if (headerPage->firstPage == -1) {
             return FILEEOF;
         }
+
+        // Read in first page of file
+        curPageNo = headerPage->firstPage;
 
         status = bufMgr->readPage(filePtr, curPageNo, curPage);
         curDirtyFlag = false;
@@ -354,7 +357,7 @@ const Status HeapFileScan::scanNext(RID &outRid) {
 
         status = curPage->firstRecord(curRec);
 
-        if (status == NOMORERECS) {
+        if (status == NORECORDS) {
             status = bufMgr->unPinPage(filePtr, curPageNo, curDirtyFlag);
             curPageNo = -1;
             curPage = NULL;
