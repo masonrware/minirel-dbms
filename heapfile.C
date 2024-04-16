@@ -345,10 +345,9 @@ const Status HeapFileScan::scanNext(RID &outRid) {
         }
 
         // Read in and pin the first page of file
-        curPageNo = headerPage->firstPage;
-
-        status = bufMgr->readPage(filePtr, curPageNo, curPage);
+        status = bufMgr->readPage(filePtr, headerPage->firstPage, curPage);
         curRec = NULLRID;
+        curPageNo = headerPage->firstPage;
 
         if (status != OK) {
             return status;
@@ -377,6 +376,9 @@ const Status HeapFileScan::scanNext(RID &outRid) {
     while (true) {
         status = curPage->nextRecord(curRec, nextRid);
         if (status == OK) {
+            // TODO
+            // !! is this how we update curRec????
+            // TODO
             curRec = nextRid;
             status = curPage->getRecord(curRec, rec);
             if (status != OK) {
@@ -391,24 +393,23 @@ const Status HeapFileScan::scanNext(RID &outRid) {
             while (status == NORECORDS || status == ENDOFPAGE) {
                 status = curPage->getNextPage(nextPageNo);
                 if (nextPageNo == -1) {
+                    cout << "HITHER BE" << 396 << endl;
                     return FILEEOF;
                 }
 
+                // unpin the current page
                 status = bufMgr->unPinPage(filePtr, curPageNo, curDirtyFlag);
-                curPageNo = -1;
-                curPage = NULL;
-
                 if (status != OK) {
                     return status;
                 }
 
-                curDirtyFlag = false;
-
+                // update the current page to the next page
+                status = bufMgr->readPage(filePtr, nextPageNo, curPage);
+                if (status != OK) {
+                    return status;
+                }
                 curPageNo = nextPageNo;
-                status = bufMgr->readPage(filePtr, curPageNo, curPage);
-                if (status != OK) {
-                    return status;
-                }
+                curDirtyFlag = false;
 
                 status = curPage->firstRecord(curRec);
                 if (status != OK && status != NOMORERECS) {
@@ -615,7 +616,7 @@ const Status InsertFileScan::insertRecord(const Record &rec, RID &outRid)
         curDirtyFlag = false;
         curPage = NULL;
 
-        unpinStatus = bufMgr->unPinPage(filePtr, targetPageNo, true); // unpin failed page
+        unpinStatus = bufMgr->unPinPage(filePtr, targetPageNo, curDirtyFlag); // unpin failed page
 
         // return error
         return operationStatus;
@@ -636,7 +637,7 @@ const Status InsertFileScan::insertRecord(const Record &rec, RID &outRid)
         curDirtyFlag = true;
         outRid = generatedRID;
 
-        unpinStatus = bufMgr->unPinPage(filePtr, curPageNo, true); // unpin failed page
+        unpinStatus = bufMgr->unPinPage(filePtr, curPageNo, curDirtyFlag); // unpin failed page
 
         return OK; //poggies
     }
