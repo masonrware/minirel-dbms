@@ -333,7 +333,7 @@ const Status HeapFileScan::scanNext(RID &outRid) {
     RID nextRid;
     Record rec;
     int nextPageNo;
-    
+
     if (curPageNo < 0) {
         return FILEEOF;
     }
@@ -381,7 +381,9 @@ const Status HeapFileScan::scanNext(RID &outRid) {
             // TODO
             // !! is this how we update curRec????
             // TODO
-            curRec = nextRid;
+            // curRec = nextRid;
+            curRec.pageNo = nextRid.pageNo;
+            curRec.slotNo = nextRid.slotNo;
             status = curPage->getRecord(curRec, rec);
             if (status != OK) {
                 return status;
