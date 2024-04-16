@@ -374,8 +374,10 @@ const Status HeapFileScan::scanNext(RID &outRid) {
     }
 
     while (true) {
+        
         // get next record
         status = curPage->nextRecord(curRec, nextRid);
+        //cout <<"after nextRecord: curRec: "<< curRec.pageNo <<"," <<curRec.slotNo  << "nextRid: "<< nextRid.pageNo << "," <<nextRid.slotNo << endl; 
         // if it exists on this page
         if (status == OK) {
             // TODO
@@ -395,6 +397,7 @@ const Status HeapFileScan::scanNext(RID &outRid) {
         else {
             // while (status == NORECORDS || status == ENDOFPAGE) {
                 status = curPage->getNextPage(nextPageNo);
+                //  cout <<"!!! "<< nextPageNo << endl; 
                 if (nextPageNo == -1) {
                     return FILEEOF;
                 }
@@ -414,9 +417,13 @@ const Status HeapFileScan::scanNext(RID &outRid) {
                 curDirtyFlag = false;
 
                 status = curPage->firstRecord(curRec);
-                if (status != OK && status != NOMORERECS) {
+                if (status == NORECORDS){
+                    continue;
+                }
+                if (status != OK) {
                     return status;
                 }
+                
             // }
 
             status = curPage->getRecord(curRec, rec);
