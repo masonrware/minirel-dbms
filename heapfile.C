@@ -340,21 +340,25 @@ const Status HeapFileScan::scanNext(RID &outRid) {
 
     if (curPage == NULL) {
         curPageNo = headerPage->firstPage;
-        if (curPageNo == -1) {
+        if (headerPage->firstPage == -1) {
             return FILEEOF;
         }
 
         status = bufMgr->readPage(filePtr, curPageNo, curPage);
+        curDirtyFlag = false;
+        curRec = NULLRID;
+
         if (status != OK) {
             return status;
         }
 
-        curDirtyFlag = false;
-        curRec = NULLRID;
-
         status = curPage->firstRecord(curRec);
+
         if (status == NOMORERECS) {
-            return handlePageEnd();
+            status = bufMgr->unPinPage(filePtr, curPageNo, curDirtyFlag);
+            curPageNo = -1;
+            curPage = NULL;
+            return FILEEOF;
         }
 
         status = curPage->getRecord(curRec, rec);
@@ -388,8 +392,24 @@ const Status HeapFileScan::scanNext(RID &outRid) {
                     return FILEEOF;
                 }
 
-                status = handlePageEnd();
+                status = bufMgr->unPinPage(filePtr, curPageNo, curDirtyFlag);
+                curPageNo = -1;
+                curPage = NULL;
+
                 if (status != OK) {
+                    return status;
+                }
+
+                curDirtyFlag = false;
+
+                curPageNo = nextPageNo;
+                status = bufMgr->readPage(filePtr, curPageNo, curPage);
+                if (status != OK) {
+                    return status;
+                }
+
+                status = curPage->firstRecord(curRec);
+                if (status != OK && status != NOMORERECS) {
                     return status;
                 }
             }
@@ -408,17 +428,6 @@ const Status HeapFileScan::scanNext(RID &outRid) {
     return OK;
 }
 
-Status HeapFileScan::handlePageEnd() {
-    Status status = bufMgr->unPinPage(filePtr, curPageNo, curDirtyFlag);
-    curPageNo = -1;
-    curPage = NULL;
-
-    if (status != OK) {
-        return status;
-    }
-
-    return FILEEOF;
-}
 
 
 
