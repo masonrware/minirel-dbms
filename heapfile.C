@@ -469,6 +469,11 @@ const Status HeapFileScan::scanNext(RID &outRid)
 
                 // Get the first record of the page
                 status = curPage->firstRecord(curRec);
+
+                if (status != OK && status != NOMORERECS) // handle error or no records case
+                {
+                    return status;
+                }
             }
 
             // actually get the record
