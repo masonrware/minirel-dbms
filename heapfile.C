@@ -348,7 +348,7 @@ const Status HeapFileScan::scanNext(RID &outRid) {
 
         // Read in and pin the first page of file
         status = bufMgr->readPage(filePtr, headerPage->firstPage, curPage);
-        curRec = NULLRID;
+        // curRec = NULLRID;
         curPageNo = headerPage->firstPage;
 
         if (status != OK) {
@@ -434,7 +434,7 @@ const Status HeapFileScan::scanNext(RID &outRid) {
                 cout << 433 << endl;
             // }
             
-            curRec.slotNo -= 1;
+            // curRec.slotNo += 1;
 
             status = curPage->getRecord(curRec, rec);
             if (status != OK) {
