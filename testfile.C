@@ -141,10 +141,7 @@ int main(int argc, char **argv)
     cout << "\n<><><><><><>\n" << "TEST  4" << endl;
     
     // scan the file sequentially checking that each record was stored properly
-    cout << "scan file dummy.02 " << endl;
-
-    cout << status << endl;
-    
+    cout << "scan file dummy.02 " << endl;    
     scan1 = new HeapFileScan("dummy.02", status);
     if (status != OK) error.print(status);
     else 
@@ -182,6 +179,9 @@ int main(int argc, char **argv)
 
 	// scan the file sequentially checking that each record was stored properly
     cout << endl << "scan file dummy.02 " << endl;
+
+    error.print(status);
+
     scan1 = new HeapFileScan("dummy.02", status);
     if (status != OK) { error.print(status);
         cout << "problem place 1" << endl;
