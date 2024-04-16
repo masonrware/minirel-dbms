@@ -348,7 +348,7 @@ const Status HeapFileScan::scanNext(RID &outRid) {
         curPageNo = headerPage->firstPage;
 
         status = bufMgr->readPage(filePtr, curPageNo, curPage);
-        curDirtyFlag = false;
+        // curDirtyFlag = false;
         curRec = NULLRID;
 
         if (status != OK) {
