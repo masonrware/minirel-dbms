@@ -511,6 +511,8 @@ const Status HeapFileScan::deleteRecord()
     Status status;
 
     // delete the "current" record from the page
+    cout << "CURREC PG: " << curRec.pageNo << endl;
+    cout << "CURREC SLOT: " << curRec.slotNo << endl;
     status = curPage->deleteRecord(curRec);
     curDirtyFlag = true;
 
