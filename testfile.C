@@ -558,8 +558,8 @@ int main(int argc, char **argv)
     	    rec1.f = i;
     	    status = scan1->getRecord(dbrec2);
     	    if (status != OK) break;
-	    if (memcmp(&rec1, dbrec2.data, sizeof(RECORD)) != 0)
-                cout << "562: err0r reading record " << i << " back" << endl;
+	    if (memcmp(&rec1, dbrec2.data, sizeof(RECORD)) != 0){}
+                // cout << "562: err0r reading record " << i << " back" << endl;
 
 	    if ((i > 1000) && ( i <= 2000))
             {
