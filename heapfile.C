@@ -157,6 +157,9 @@ HeapFile::HeapFile(const string & fileName, Status& returnStatus)
         curPageNo = headerPage->firstPage;
         curDirtyFlag = false; // Current page initially not dirty
         curRec = NULLRID; // No current record initially
+
+        returnStatus = OK;
+        return;
     }
     else
     {
