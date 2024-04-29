@@ -72,7 +72,7 @@ const Status QU_Select(const string & result,
         comparisonOperator = op;
     } 
     else {
-        attributeDetails = {projNames[0].relName, projNames[0].attrName, 0, 0, STRING};
+        attributeDetails = {*projNames[0].relName, *projNames[0].attrName, 0, 0, STRING};
         comparisonValue = nullptr;
         comparisonOperator = EQ;
     }
