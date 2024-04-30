@@ -6,6 +6,8 @@
 #include <iostream>
 #include <vector>
 #include <string.h>
+#include <assert.h>
+#include "stdlib.h"
 using namespace std;
 
 #include "page.h"
@@ -91,8 +93,6 @@ public:
 
     // marks current page of scan dirty
     const Status markDirty();
-
-    Status handlePageEnd();
 
 private:
     int   offset;            // byte offset of filter attribute

@@ -4,6 +4,7 @@
 #include <iostream>
 using namespace std;
 #include "page.h"
+#include "string.h"
 
 // page class constructor
 void Page::init(int pageNo)
@@ -97,7 +98,6 @@ const Status Page::insertRecord(const Record & rec, RID& rid)
 
 	tmpRid.pageNo = curPage;
 	tmpRid.slotNo = -i; // make a positive slot number
-	// cout << "100 ~!!! " << tmpRid.slotNo << endl;
 	rid = tmpRid;
 
 	return OK;
@@ -185,10 +185,7 @@ const Status Page::deleteRecord(const RID & rid)
 	      return OK;
 	}
     }
-    else{
-		cout << ">>>> " << slotNo << endl;
-		return INVALIDSLOTNO;
-	} 
+    else return INVALIDSLOTNO;
 }
 
 // returns RID of first record on page
@@ -243,18 +240,18 @@ const Status Page::nextRecord (const RID &curRid, RID& nextRid) const
 // returns length and pointer to record with RID rid
 const Status Page::getRecord(const RID & rid, Record & rec)
 {
-	
-	
-	
     int	slotNo = rid.slotNo;
     int offset;
-	
+
     if (((-slotNo) > slotCnt) && (slot[-slotNo].length > 0))
     {
         offset = slot[-slotNo].offset; // extract offset in data[]
         rec.data = &data[offset];  // return pointer to actual record
         rec.length = slot[-slotNo].length; // return length of record
-		return OK;
+	return OK;
     }
-    else return INVALIDSLOTNO;
+
+    else {
+		return INVALIDSLOTNO;
+	}
 }
