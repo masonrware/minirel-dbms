@@ -16,19 +16,40 @@ const Status QU_Delete(const string & relation,
                        const Datatype type, 
                        const char *attrValue) {
 
+	cout << "Executing QU_Delete..." << endl;
+
     // Open the heap file
     Status status;
     HeapFileScan *fileScan = new HeapFileScan(relation, status);
     if (status != OK) {
         delete fileScan;
+		fileScan = NULL;
         return status;
     }
 
+	AttrCatalog *attrCat = new AttrCatalog(status);
+	if (status != OK) {
+		delete fileScan;
+		fileScan = NULL;
+		return status;
+	}
+
+	AttrDesc attrDesc;
+	status = attrCat->getInfo(relation, attrName, attrDesc);
+	if (status != OK) {
+		delete fileScan;
+		fileScan = NULL;
+		return status;
+	}
+
+	int offset = attrDesc.attrOffset;
+	int length = attrDesc.attrLen;
+
     // Start the scan
-	// TODO what is length supposed to be, can it be 0?
-    status = fileScan->startScan(0, 0, type, attrValue, op);
+    status = fileScan->startScan(offset, length, type, attrValue, op);
     if (status != OK) {
         delete fileScan;
+		fileScan = NULL;
         return status;
     }
 
@@ -37,18 +58,11 @@ const Status QU_Delete(const string & relation,
 
     // Iterate over each tuple in the heap file
     while ((status = fileScan->scanNext(rid)) == OK) {
-        // Get the record
-        status = fileScan->getRecord(rec);
-        if (status != OK) {
-            delete fileScan;
-            return status;
-        }
-
 		// Delete the record if it matches the predicate
-		// TODO this should work right?
 		status = fileScan->deleteRecord();
 		if (status != OK) {
 			delete fileScan;
+			fileScan = NULL;
 			return status;
 		}
     }
@@ -58,6 +72,7 @@ const Status QU_Delete(const string & relation,
     status = fileScan->endScan();
     if (status != OK) {
         delete fileScan;
+		fileScan = NULL;
         return status;
     }
 

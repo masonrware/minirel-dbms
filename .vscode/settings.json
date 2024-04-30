@@ -5,6 +5,7 @@
         "heapfile.C": "cpp",
         "insert.C": "cpp",
         "delete.C": "cpp",
-        "select.C": "cpp"
+        "select.C": "cpp",
+        "catalog.C": "cpp"
     }
 }
