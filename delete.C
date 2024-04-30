@@ -44,17 +44,27 @@ const Status QU_Delete(const string & relation,
 
 	int offset = attrDesc.attrOffset;
 	int length = attrDesc.attrLen;
+	int intAttrValue;
+	float floatAttrValue;
 
-    // Start the scan
-    status = fileScan->startScan(offset, length, type, attrValue, op);
-    if (status != OK) {
-        delete fileScan;
+	// Cast attrValue properly
+	if(type == INTEGER) {
+		intAttrValue = atoi(attrValue);
+		status = fileScan->startScan(offset, length, type, reinterpret_cast<char *>(&intAttrValue), op);
+	} else if  (type == FLOAT) {
+		floatAttrValue = atof(attrValue);
+		status = fileScan->startScan(offset, length, type, reinterpret_cast<char *>(&floatAttrValue), op);
+	} else if (type == STRING) {
+		status = fileScan->startScan(offset, length, type, attrValue, op);
+	}
+
+	if (status != OK) {
+		delete fileScan;
 		fileScan = NULL;
-        return status;
-    }
+		return status;
+	}
 
     RID rid;
-    Record rec;
 
     // Iterate over each tuple in the heap file
     while ((status = fileScan->scanNext(rid)) == OK) {

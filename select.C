@@ -72,6 +72,7 @@ const Status QU_Select(const string & result,
         comparisonOperator = op;
     } 
     else {
+        // attributeDetails = {*projNames[0].relName, *projNames[0].attrName, 0, 0, STRING};
         strncpy(attributeDetails.relName, projNames[0].relName, strlen(projNames[0].relName));
         strncpy(attributeDetails.attrName, projNames[0].attrName, strlen(projNames[0].attrName));
         attributeDetails.attrOffset = 0;
