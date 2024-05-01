@@ -75,11 +75,10 @@ const Status RelCatalog::removeInfo(const string & relation)
   hfs = new HeapFileScan(RELCATNAME, status);
   if (status != OK) return status;
 
-  if ((status = hfs->startScan(0, relation.length() + 1, STRING,
-			  relation.c_str(), EQ)) != OK)
+  if ((status = hfs->startScan(0, relation.length() + 1, STRING, relation.c_str(), EQ)) != OK)
   {
-	delete hfs;
-        return status;
+    delete hfs;
+    return status;
   }
   status = hfs->scanNext(rid);
   if (status == FILEEOF) status = RELNOTFOUND;

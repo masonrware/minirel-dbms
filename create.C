@@ -23,6 +23,7 @@ const Status RelCatalog::createRel(const string & relation,
   if (status != RELNOTFOUND)
     return status;
 
+  
   // make sure there are no duplicate attribute names
 
   unsigned int tupleWidth = attrList[0].attrLen;

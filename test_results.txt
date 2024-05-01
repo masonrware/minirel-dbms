@@ -11751,11 +11751,9 @@ Number of records: 29
 
 >>> delete stars where stars.plays = "Lisa";
 Executing QU_Delete...
-stars plays 2 0 Lisa
 
 >>> delete stars where stars.real_name = "Anthony, Eugene";
 Executing QU_Delete...
-stars real_name 2 0 Anthony, Eugene
 
 >>> print stars;
 Relation name: stars
@@ -11794,7 +11792,6 @@ Number of records: 27
 
 >>> delete stars where stars.soapid = 1;
 Executing QU_Delete...
-stars soapid 2 1 1
 
 >>> print stars;
 Relation name: stars
@@ -11830,7 +11827,30 @@ Number of records: 24
 
 >>> delete stars;
 Executing QU_Delete...
-Enter y if you want to delete testdb/*
+
+>>> print stars;
+Relation name: stars
+
+starid real_name            plays        soapid 
+------  --------------------  ------------  ------  
+
+Number of records: 0
+
+>>> delete soaps where soaps.network < "NBC";
+Executing QU_Delete...
+
+>>> print soaps;
+Relation name: soaps
+
+soapid name                 network rating 
+------  --------------------  -------  ------  
+0       Days of Our Lives     NBC      7.02    
+4       Santa Barbara         NBC      6.44    
+7       Another World         NBC      1.97    
+
+Number of records: 3
+
+>>> Enter y if you want to delete testdb/*
 Executing rm -r testdb
 running test # 8 ****************
 Database testdb created
@@ -11888,7 +11908,6 @@ Number of records: 29
 
 >>> delete stars where stars.real_name = "Novak, John";
 Executing QU_Delete...
-stars real_name 2 0 Novak, John
 
 >>> print stars;
 Relation name: stars
@@ -11927,7 +11946,6 @@ Number of records: 27
 
 >>> delete stars where stars.soapid = 5;
 Executing QU_Delete...
-stars soapid 2 1 5
 
 >>> select (stars.starid, stars.real_name, stars.plays, stars.soapid) where stars.soapid = 5;
 Creating relation Tmp_Minirel_Result
@@ -11989,7 +12007,6 @@ Number of records: 9
 
 >>> delete soaps where soaps.rating < 6.000000;
 Executing QU_Delete...
-soaps rating 0 2 6.000000
 
 >>> select (soaps.soapid) where soaps.rating = 6.000000;
 Creating relation Tmp_Minirel_Result
@@ -12017,7 +12034,27 @@ Number of records: 5
 
 >>> delete soaps;
 Executing QU_Delete...
-Enter y if you want to delete testdb/*
+
+>>> delete stars;
+Executing QU_Delete...
+
+>>> print soaps;
+Relation name: soaps
+
+soapid name                 network rating 
+------  --------------------  -------  ------  
+
+Number of records: 0
+
+>>> print stars;
+Relation name: stars
+
+starid real_name            plays        soapid 
+------  --------------------  ------------  ------  
+
+Number of records: 0
+
+>>> Enter y if you want to delete testdb/*
 Executing rm -r testdb
 running test # 9 ****************
 Database testdb created

@@ -18,111 +18,143 @@ const Status QU_Delete(const string & relation,
 
 	cout << "Executing QU_Delete..." << endl;
 
-    // Open the heap file
-    Status status;
-    HeapFileScan *fileScan = new HeapFileScan(relation, status);
-    if (status != OK) {
-        delete fileScan;
-		fileScan = NULL;
-        return status;
-    }
+	Status status;
 
-	AttrCatalog *attrCat = new AttrCatalog(status);
-	if (status != OK) {
-		delete fileScan;
-		fileScan = NULL;
-		return status;
-	}
+	if(attrName.empty() && attrValue == nullptr) {
+		#include "catalog.h"
 
-	AttrDesc attrDesc;
-	status = attrCat->getInfo(relation, attrName, attrDesc);
-	if (status != OK) {
-		delete fileScan;
-		fileScan = NULL;
-		return status;
-	}
+		Status status;
 
-	int offset = attrDesc.attrOffset;
-	int length = attrDesc.attrLen;
-	int intAttrValue;
-	float floatAttrValue;
+		// Open relation catalog
+		RelCatalog relCatalog(status);
+		if (status != OK)
+			return status;
 
-	// Cast attrValue properly
-	if(type == INTEGER) {
-		intAttrValue = atoi(attrValue);
-		status = fileScan->startScan(offset, length, type, reinterpret_cast<char *>(&intAttrValue), op);
-	} else if  (type == FLOAT) {
-		floatAttrValue = atof(attrValue);
-		status = fileScan->startScan(offset, length, type, reinterpret_cast<char *>(&floatAttrValue), op);
-	} else if (type == STRING) {
-		status = fileScan->startScan(offset, length, type, attrValue, op);
-	}
+		// Open attribute catalog
+		AttrCatalog attrCatalog(status);
+		if (status != OK)
+			return status;
 
-	if (status != OK) {
-		delete fileScan;
-		fileScan = NULL;
-		return status;
-	}
+		// Get information about the relation
+		RelDesc relDesc;
+		status = relCatalog.getInfo(relation, relDesc);
+		if (status != OK)
+			return status;
 
-    RID rid;
+		// Get attributes of the relation
+		AttrDesc* attrs = nullptr;
+		int attrCnt = 0;
+		status = attrCatalog.getRelInfo(relation, attrCnt, attrs);
+		if (status != OK)
+			return status;
 
-    // Iterate over each tuple in the heap file
-    while ((status = fileScan->scanNext(rid)) == OK) {
-		// Delete the record if it matches the predicate
-		status = fileScan->deleteRecord();
+		// Open the heap file associated with the relation
+		HeapFileScan *fileScan = new HeapFileScan(relation, status);
+		if (status != OK)
+			return status;
+
+		// Scan through the heap file and delete each tuple
+		Record record;
+		RID rid;
+		status = fileScan->startScan(attrs[0].attrOffset, attrs[0].attrLen, Datatype(attrs[0].attrType), "", NE);
+		if (status != OK)
+			return status;
+
+		// Iterate over each tuple in the heap file
+		while ((status = fileScan->scanNext(rid)) == OK) {
+			// Delete the record if it matches the predicate
+			status = fileScan->deleteRecord();
+			if (status != OK) {
+				delete fileScan;
+				fileScan = NULL;
+				return status;
+			}
+		}
+
+		status = fileScan->endScan();
 		if (status != OK) {
 			delete fileScan;
 			fileScan = NULL;
 			return status;
 		}
-    }
-	if (status != FILEEOF) error.print(status);
 
-    // End the scan
-    status = fileScan->endScan();
-    if (status != OK) {
-        delete fileScan;
+		// Clean up and return
+		delete fileScan;
 		fileScan = NULL;
-        return status;
-    }
+		delete[] attrs;
+	} else {
+		// Open the heap file
+		HeapFileScan *fileScan = new HeapFileScan(relation, status);
+		if (status != OK) {
+			delete fileScan;
+			fileScan = NULL;
+			return status;
+		}
 
-    // Clean up and return
-    delete fileScan;
-	fileScan = NULL;
-    return OK;
+		AttrCatalog *attrCat = new AttrCatalog(status);
+		if (status != OK) {
+			delete fileScan;
+			fileScan = NULL;
+			return status;
+		}
+
+		AttrDesc attrDesc;
+		status = attrCat->getInfo(relation, attrName, attrDesc);
+		if (status != OK) {
+			delete fileScan;
+			fileScan = NULL;
+			return status;
+		}
+
+		int offset = attrDesc.attrOffset;
+		int length = attrDesc.attrLen;
+		int intAttrValue;
+		float floatAttrValue;
+
+		// Cast attrValue properly
+		if(type == INTEGER) {
+			intAttrValue = atoi(attrValue);
+			status = fileScan->startScan(offset, length, type, reinterpret_cast<char *>(&intAttrValue), op);
+		} else if  (type == FLOAT) {
+			floatAttrValue = atof(attrValue);
+			status = fileScan->startScan(offset, length, type, reinterpret_cast<char *>(&floatAttrValue), op);
+		} else if (type == STRING) {
+			status = fileScan->startScan(offset, length, type, attrValue, op);
+		}
+
+		if (status != OK) {
+			delete fileScan;
+			fileScan = NULL;
+			return status;
+		}
+
+		RID rid;
+
+		// Iterate over each tuple in the heap file
+		while ((status = fileScan->scanNext(rid)) == OK) {
+			// Delete the record if it matches the predicate
+			status = fileScan->deleteRecord();
+			if (status != OK) {
+				delete fileScan;
+				fileScan = NULL;
+				return status;
+			}
+		}
+		if (status != FILEEOF) error.print(status);
+
+		// End the scan
+		status = fileScan->endScan();
+		if (status != OK) {
+			delete fileScan;
+			fileScan = NULL;
+			return status;
+		}
+
+		// Clean up and return
+		delete fileScan;
+		fileScan = NULL;
+	}
+
+	return OK;
 }
 
-
-
-// scan1 = new HeapFileScan("dummy.02", status);
-//     if (status != OK) error.print(status);
-//     else 
-//     {
-//         scan1->startScan(0, 0, STRING, NULL, EQ);
-// 		i = 0;
-// 		deleted = 0;
-// 		while ((status = scan1->scanNext(rec2Rid)) != FILEEOF)
-// 		{
-// 			// cout << "processing record " << i << i << endl;
-// 			if (status != OK) error.print(status);
-// 			if ((i % 2) != 0)
-// 			{
-// 				//printf("deleting record %d with rid(%d.%d)\n",i,rec2Rid. pageNo, rec2Rid.slotNo);
-// 				status = scan1->deleteRecord(); 
-// 				deleted++;
-// 				if ((status != OK)  && ( status != NORECORDS))
-// 				{
-//                     cout << "err0r status return from deleteRecord" << endl;
-//                     error.print(status);
-// 				}
-// 			}
-// 			i++;
-// 		}
-// 		if (status != FILEEOF) error.print(status);
-// 		cout << "deleted " << deleted << " records" << endl;
-// 		if (deleted != num / 2)
-//             cout << "Err0r.   should have deleted " << num / 2 << " records!" << endl;
-// 		scan1->endScan();
-//     }
-//     delete scan1;
-//     scan1 = NULL;

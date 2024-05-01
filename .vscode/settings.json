@@ -6,6 +6,15 @@
         "insert.C": "cpp",
         "delete.C": "cpp",
         "select.C": "cpp",
-        "catalog.C": "cpp"
+        "catalog.C": "cpp",
+        "destroy.C": "cpp",
+        "create.C": "cpp",
+        "interp.C": "cpp",
+        "string": "cpp",
+        "__config": "cpp",
+        "error.C": "cpp",
+        "bufHash.C": "cpp",
+        "chrono": "cpp",
+        "new": "cpp"
     }
 }

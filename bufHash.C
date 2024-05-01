@@ -12,8 +12,13 @@
 
 int BufHashTbl::hash(const File* file, const int pageNo)
 {
-  long tmp, value;
-  tmp = (int)(long)file;  // cast of pointer to the file object to an integer
+
+long tmp;
+tmp = (long)file;
+
+  // long tmp, value;
+  // tmp = (int)(long)file;  // cast of pointer to the file object to an integer
+  long value;
   value = (tmp + pageNo) % HTSIZE;
   return value;
 }
