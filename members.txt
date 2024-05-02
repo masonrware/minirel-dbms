@@ -1,0 +1,17 @@
+Ben Brandl
+- Testing
+- Debugging
+- Code review
+
+Mason Ware
+- delete.C
+- Debugging
+- Testing
+- Code review
+
+Wen Jie Lee
+- select.C
+- insert.C
+- Debugging
+- Testing
+- Code review
